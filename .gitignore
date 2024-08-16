@@ -46,8 +46,8 @@ android/build.gradle
 android/gradle.properties
 android/settings.gradle
 android/app/build.gradle
-android/app/src/debug/AndroidManifest.xml
-android/app/src/main/AndroidManifest.xml
+# android/app/src/debug/AndroidManifest.xml
+# android/app/src/main/AndroidManifest.xml
 android/app/src/main/java/com/getflutterfire/get_flutter_fire/MainActivity.java
 android/app/src/main/res/drawable/launch_background.xml
 android/app/src/main/res/drawable-v21/launch_background.xml
