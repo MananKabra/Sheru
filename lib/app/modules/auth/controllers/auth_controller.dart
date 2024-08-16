@@ -17,11 +17,19 @@ class AuthController extends GetxService {
       var doc = await usersRef.doc(userID).get();
       if (doc.exists) {
         _user.value = UserModel.fromMap(doc.data()!);
-      } else {
-        _user.value = null;
       }
     } catch (error) {
+      _user.value = null;
       Get.snackbar('Error', 'Failed to fetch user data');
+    }
+  }
+
+  Future<void> registerUser(UserModel user) async {
+    try {
+      await usersRef.doc(user.id).set(user.toMap());
+      _user.value = user;
+    } catch (error) {
+      Get.snackbar('Error', 'Failed to register user');
     }
   }
 }

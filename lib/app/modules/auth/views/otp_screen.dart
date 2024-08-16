@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
-import 'package:get_flutter_fire/constants.dart';
+import 'package:get_flutter_fire/app/routes/app_routes.dart';
 import 'package:get_flutter_fire/services/auth_service.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -39,22 +39,15 @@ class _OtpScreenState extends State<OtpScreen> {
               bool success = await authService.verifyOTP(_otpController.text);
               if (success) {
                 final authController = Get.find<AuthController>();
-
-                print("aaaaaaaaaaaaaaaaaaaaaaaaaa : ${authService.userID}");
-                authController.fetchUserData(authService.userID);
-                print("aaaaaaaaaaaaaaaaaaaaaaaaaa : ${authController.user}");
+                await authController.fetchUserData(authService.userID);
+                if (authController.user == null) {
+                  Get.offNamed(Routes.REGISTER);
+                } else {
+                  Get.offNamed(Routes.HOME);
+                }
               }
             },
             child: const Text('Login'),
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              await usersRef.doc('trial').set({
-                'name': 'Sheru',
-                'email': 'Dw5p4@example.com',
-              });
-            },
-            child: const Text('help'),
           ),
         ],
       ),
