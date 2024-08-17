@@ -7,6 +7,10 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const ADDRESS = _Paths.ADDRESS;
   static const ROOT = _Paths.ROOT;
+//profile routes
+  static const ACCOUNT_DETAILS = _Paths.ACCOUNT_DETAILS;
+  static const MANAGE_ADDRESS = _Paths.MANAGE_ADDRESS;
+  static const ADD_ADDRESS = _Paths.ADD_ADDRESS;
 }
 
 abstract class _Paths {
@@ -17,4 +21,8 @@ abstract class _Paths {
   static const String REGISTER = '/register';
   static const String ADDRESS = '/address';
   static const String ROOT = '/root';
+  //Profile Routes
+  static const ACCOUNT_DETAILS = '/account_details';
+  static const MANAGE_ADDRESS = '/manage_address';
+  static const ADD_ADDRESS = '/add_address';
 }

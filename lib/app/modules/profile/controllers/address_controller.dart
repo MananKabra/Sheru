@@ -1,14 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
+import 'package:get_flutter_fire/app/modules/home/controllers/home_controller.dart';
+import 'package:get_flutter_fire/app/routes/app_routes.dart';
+import 'package:get_flutter_fire/app/widgets/common/show_loader.dart';
 import 'package:get_flutter_fire/models/address_model.dart';
 import 'package:get_flutter_fire/models/user_model.dart';
-import 'package:get_flutter_fire/services/auth_service.dart';
-import 'package:get_flutter_fire/app/routes/app_routes.dart';
 import 'package:uuid/uuid.dart';
 
 class AddressController extends GetxController {
-  final AuthService authService = Get.find<AuthService>();
   final AuthController authController = Get.find<AuthController>();
 
   final line1Controller = TextEditingController();
@@ -20,11 +21,36 @@ class AddressController extends GetxController {
   final longitudeController = TextEditingController(text: '');
 
   late UserModel user;
+  final CollectionReference addressesRef =
+      FirebaseFirestore.instance.collection('addresses');
+
+  var addresses = <AddressModel>[].obs;
 
   @override
   void onInit() {
     super.onInit();
-    user = Get.arguments['user'] as UserModel;
+
+    if (Get.arguments != null && Get.arguments.containsKey('user')) {
+      user = Get.arguments['user'] as UserModel;
+    } else {
+      user = authController.currentUser.value!;
+    }
+
+    fetchAddresses();
+  }
+
+  Future<void> fetchAddresses() async {
+    try {
+      final querySnapshot =
+          await addressesRef.where('userID', isEqualTo: user.id).get();
+
+      addresses.assignAll(querySnapshot.docs
+          .map(
+              (doc) => AddressModel.fromMap(doc.data() as Map<String, dynamic>))
+          .toList());
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to load addresses: $e');
+    }
   }
 
   void saveAddress() {
@@ -48,10 +74,30 @@ class AddressController extends GetxController {
       userID: user.id,
     );
 
-    authService.saveAddress(address);
-    authController.updateUserAddress(user, addressID);
+    addressesRef.doc(addressID).set(address.toMap());
+    if (user.defaultAddressID.isEmpty) {
+      authController.updateDefaultAddressID(addressID);
+    }
 
     Get.offAllNamed(Routes.ROOT);
+  }
+
+  Future<void> setDefaultAddress(AddressModel address) async {
+    showLoader();
+    await authController.updateDefaultAddressID(address.id);
+    await fetchAddresses();
+    final homeController = Get.find<HomeController>();
+    await homeController.fetchOffersForUserLocation();
+    dismissLoader();
+  }
+
+  Future<void> deleteAddress(String id) async {
+    try {
+      await addressesRef.doc(id).delete();
+      addresses.removeWhere((address) => address.id == id);
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to delete address: $e');
+    }
   }
 
   @override

@@ -4,7 +4,10 @@ import 'package:get_flutter_fire/app/modules/auth/views/login_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/otp_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/register_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/welcome_screen.dart';
-import 'package:get_flutter_fire/app/modules/home/root_view.dart';
+import 'package:get_flutter_fire/app/modules/profile/views/account_detail.dart';
+import 'package:get_flutter_fire/app/modules/profile/views/add_addresses.dart';
+import 'package:get_flutter_fire/app/modules/profile/views/manage_address.dart';
+import 'package:get_flutter_fire/app/modules/root/root_view.dart';
 import 'package:get_flutter_fire/app/modules/splash/splash_screen.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
 
@@ -44,6 +47,20 @@ class AppPages {
       name: Routes.ROOT,
       page: () => RootView(),
       // binding: AuthBindings(),
+    ),
+
+    //profile routes
+    GetPage(
+      name: Routes.ACCOUNT_DETAILS,
+      page: () => const AccountDetailsScreen(),
+    ),
+    GetPage(
+      name: Routes.MANAGE_ADDRESS,
+      page: () => ManageAddressScreen(),
+    ),
+    GetPage(
+      name: Routes.ADD_ADDRESS,
+      page: () => AddAddressScreen(),
     ),
   ];
 }

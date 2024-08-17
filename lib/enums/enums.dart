@@ -1,4 +1,4 @@
-enum UserType { buyer, seller }
+enum UserType { buyer, seller, admin }
 
 enum AccessLevel {
   public,

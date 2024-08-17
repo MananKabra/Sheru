@@ -33,6 +33,8 @@ class UserModel {
     required this.lastSeenAt,
   });
 
+  get role => null;
+
   UserModel copyWith({
     String? id,
     String? name,

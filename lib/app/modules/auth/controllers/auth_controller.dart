@@ -11,6 +11,9 @@ class AuthController extends GetxController {
 
   UserModel? get user => _user.value;
 
+  // Add this property to track the current user
+  Rxn<UserModel> get currentUser => _user;
+
   @override
   void onInit() {
     super.onInit();
@@ -74,10 +77,25 @@ class AuthController extends GetxController {
     }
   }
 
+  // Updated method to set default address
+  Future<void> updateDefaultAddressID(String addressID) async {
+    if (_user.value == null) return;
+
+    try {
+      await usersRef
+          .doc(_user.value!.id)
+          .update({'defaultAddressID': addressID});
+      _user.value = _user.value!.copyWith(defaultAddressID: addressID);
+      _storageService.saveUserData(_user.value!);
+    } catch (e) {
+      _handleError('Failed to update user address: $e');
+    }
+  }
+
+  // Updated method to handle user address
   Future<void> updateUserAddress(UserModel user, String addressID) async {
     try {
       await usersRef.doc(user.id).update({'defaultAddressID': addressID});
-
       _user.value = _user.value!.copyWith(defaultAddressID: addressID);
       _storageService.saveUserData(_user.value!);
     } catch (e) {

@@ -6,10 +6,10 @@ import 'package:get_flutter_fire/app/widgets/common/spacing.dart';
 import 'package:get_flutter_fire/app/widgets/common/custom_button.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
 
-class AddressScreen extends StatelessWidget {
+class AddAddressScreen extends StatelessWidget {
   final AddressController controller = Get.put(AddressController());
 
-  AddressScreen({super.key});
+  AddAddressScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class AddressScreen extends StatelessWidget {
                     ),
                     const Spacing(size: AppTheme.spacingExtraLarge),
                     CustomButton(
-                      onPressed: controller.saveAddress,
+                      onPressed: controller.saveAddress, // Use saveAddress here
                       text: 'Save Address',
                       isDisabled: false,
                     ),
