@@ -1,17 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
+import 'package:get_flutter_fire/models/address_model.dart';
 import 'package:get_flutter_fire/constants.dart';
 
 class AuthService extends GetxService {
   static AuthService get to => Get.find();
 
   String _verificationId = '';
-
   String _phoneNumber = '';
   String get phoneNumber => _phoneNumber;
 
   String get userID => auth.currentUser!.uid;
+
+  // Save the address to Firestore
+  Future<void> saveAddress(AddressModel address) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('addresses')
+          .doc(address.id)
+          .set(address.toMap());
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to save address: $e');
+    }
+  }
 
   Future<void> verifyPhoneNumber(String phoneNumber) async {
     _phoneNumber = phoneNumber;
@@ -25,7 +38,7 @@ class AuthService extends GetxService {
       },
       codeSent: (String verificationId, int? resendToken) {
         _verificationId = verificationId;
-        Get.toNamed(Routes.OTP);
+        Get.toNamed(Routes.OTP, arguments: {'phoneNumber': _phoneNumber});
       },
       codeAutoRetrievalTimeout: (String verificationId) {},
     );

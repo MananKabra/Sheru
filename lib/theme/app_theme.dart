@@ -10,6 +10,7 @@ class AppTheme {
   static const Color greyTextColor = Color(0xffA7A7AF);
   static const Color backgroundColor = Color(0xffF2F2F3);
   static const Color borderColor = Color(0xffDCDCE0);
+  static const Color colorDisabled = Color(0xFFCFCFCF);
   static const Color colorRed = Color(0xffED0000);
 
   //Font Size
@@ -76,7 +77,7 @@ class AppTheme {
     fontFamily: 'Nexa-Bold',
     fontSize: fontSizeLarge,
     fontWeight: FontWeight.w400,
-    color: colorBlue,
+    color: colorRed,
   );
 
   // Padding
@@ -149,6 +150,10 @@ class AppTheme {
       Color(0xFFFCF1BF),
       Color(0xFFB2C1D8),
     ],
+  );
+  static const UnderlineInputBorder textfieldUnderlineBorder =
+      UnderlineInputBorder(
+    borderSide: BorderSide(color: borderColor, width: 1),
   );
 
   static const LinearGradient primaryGradient = LinearGradient(

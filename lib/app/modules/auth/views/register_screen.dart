@@ -1,56 +1,125 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
-import 'package:get_flutter_fire/app/routes/app_routes.dart';
-import 'package:get_flutter_fire/models/user_model.dart';
-import 'package:get_flutter_fire/services/auth_service.dart';
+import 'package:get_flutter_fire/app/modules/auth/controllers/regster_controller.dart';
+import 'package:get_flutter_fire/app/widgets/common/custom_phone_textfield.dart';
+import 'package:get_flutter_fire/app/widgets/common/custom_textfield.dart';
+import 'package:get_flutter_fire/app/widgets/common/spacing.dart';
+import 'package:get_flutter_fire/app/widgets/common/custom_button.dart';
+import 'package:get_flutter_fire/theme/app_theme.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  final String phoneNumber;
 
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
+  RegisterScreen({super.key, required this.phoneNumber});
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _phoneNumberController = TextEditingController();
+  final RegisterController controller = Get.put(RegisterController());
+
   @override
   Widget build(BuildContext context) {
-    final authController = Get.find<AuthController>();
-    final authService = Get.find<AuthService>();
     return Scaffold(
-        body: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextField(
-          controller: _nameController,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Name',
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: AppTheme.primaryGradient,
+        ),
+        padding: AppTheme.paddingDefault,
+        child: Center(
+          child: SingleChildScrollView(
+            child: Card(
+              shape: AppTheme.rrShape,
+              elevation: 10,
+              shadowColor: AppTheme.colorBlack.withOpacity(0.15),
+              child: Padding(
+                padding: const EdgeInsets.all(AppTheme.spacingLarge),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Register',
+                      style: AppTheme.fontStyleLarge.copyWith(
+                        color: AppTheme.colorBlack,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Spacing(size: AppTheme.spacingMedium),
+                    CustomTextField(
+                      labelText: 'Full Name',
+                      controller: controller.nameController,
+                    ),
+                    const Spacing(size: AppTheme.spacingSmall),
+                    CustomTextField(
+                      labelText: 'Email (optional)',
+                      keyboardType: TextInputType.emailAddress,
+                      controller: controller.emailController,
+                    ),
+                    const Spacing(size: AppTheme.spacingSmall),
+                    PhoneTextField(
+                      hintText: 'Enter your 10-digit mobile number',
+                      readOnly: true,
+                      controller: TextEditingController(text: phoneNumber),
+                    ),
+                    const Divider(height: 40, thickness: 1),
+                    const Spacing(size: AppTheme.spacingSmall),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Are you a Business?',
+                            style: AppTheme.fontStyleMedium),
+                        Obx(() => Switch(
+                              value: controller.isBusiness.value,
+                              onChanged: controller.toggleBusiness,
+                            )),
+                      ],
+                    ),
+                    Obx(() => Visibility(
+                          visible: controller.isBusiness.value,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Business Details',
+                                style: AppTheme.fontStyleDefaultBold.copyWith(
+                                  fontSize: 16,
+                                  color: AppTheme.colorBlack,
+                                ),
+                              ),
+                              const Spacing(size: AppTheme.spacingSmall),
+                              CustomTextField(
+                                labelText: 'Business Name',
+                                controller: controller.businessNameController,
+                              ),
+                              const Spacing(size: AppTheme.spacingSmall),
+                              CustomTextField(
+                                labelText: 'Business Type',
+                                controller: controller.businessTypeController,
+                              ),
+                              const Spacing(size: AppTheme.spacingSmall),
+                              CustomTextField(
+                                labelText: 'GST Number',
+                                controller: controller.gstNumberController,
+                              ),
+                              const Spacing(size: AppTheme.spacingSmall),
+                              CustomTextField(
+                                labelText: 'PAN Number',
+                                controller: controller.panNumberController,
+                              ),
+                            ],
+                          ),
+                        )),
+                    const Spacing(size: AppTheme.spacingExtraLarge),
+                    CustomButton(
+                      onPressed: () {
+                        controller.registerUser(phoneNumber);
+                      },
+                      text: 'Register',
+                      isDisabled: false,
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
         ),
-        TextField(
-          controller: _phoneNumberController,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Phone',
-          ),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            String userID = authService.userID;
-            UserModel user = UserModel(
-              id: userID,
-              name: _nameController.text,
-              phoneNumber: _phoneNumberController.text,
-            );
-            authController.registerUser(user);
-            Get.offNamed(Routes.HOME);
-          },
-          child: const Text('Register'),
-        ),
-      ],
-    ));
+      ),
+    );
   }
 }

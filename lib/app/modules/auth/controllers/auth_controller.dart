@@ -1,35 +1,96 @@
 import 'package:get/get.dart';
-import 'package:get_flutter_fire/constants.dart';
 import 'package:get_flutter_fire/models/user_model.dart';
+import 'package:get_flutter_fire/constants.dart';
+import 'package:get_flutter_fire/services/get_storage_service.dart';
 
-class AuthController extends GetxService {
-  // late Rxn<EmailAuthCredential> credential = Rxn<EmailAuthCredential>();
-  // final Rxn<User> _firebaseUser = Rxn<User>();
-  // final Rx<Role> _userRole = Rx<Role>(Role.buyer);
-  // final Rx<bool> robot = RxBool(useRecaptcha);
-  // final RxBool registered = false.obs;
+class AuthController extends GetxController {
+  final GetStorageService _storageService = GetStorageService();
 
-  Rxn<UserModel> _user = Rxn<UserModel>();
+  var isLoading = false.obs;
+  final Rxn<UserModel> _user = Rxn<UserModel>();
+
   UserModel? get user => _user.value;
 
+  @override
+  void onInit() {
+    super.onInit();
+    _loadUserData();
+    _checkForUserRoleUpdate();
+  }
+
+  void _loadUserData() {
+    final storedUser = _storageService.getUserData();
+    if (storedUser != null) {
+      _user.value = storedUser;
+    }
+  }
+
+  Future<void> _checkForUserRoleUpdate() async {
+    if (_user.value == null) return;
+
+    isLoading.value = true;
+    try {
+      var doc = await usersRef.doc(_user.value!.id).get();
+      if (doc.exists) {
+        UserModel updatedUser = UserModel.fromMap(doc.data()!);
+        if (updatedUser.userType != _user.value!.userType) {
+          _user.value = updatedUser;
+          _storageService.saveUserData(updatedUser);
+        }
+      }
+    } catch (error) {
+      _handleError('Failed to check user role');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   Future<void> fetchUserData(String userID) async {
+    isLoading.value = true;
     try {
       var doc = await usersRef.doc(userID).get();
       if (doc.exists) {
         _user.value = UserModel.fromMap(doc.data()!);
+        _storageService.saveUserData(_user.value!);
       }
     } catch (error) {
       _user.value = null;
-      Get.snackbar('Error', 'Failed to fetch user data');
+      _handleError('Failed to fetch user data');
+    } finally {
+      isLoading.value = false;
     }
   }
 
   Future<void> registerUser(UserModel user) async {
+    isLoading.value = true;
     try {
       await usersRef.doc(user.id).set(user.toMap());
       _user.value = user;
+      _storageService.saveUserData(user);
     } catch (error) {
-      Get.snackbar('Error', 'Failed to register user');
+      _handleError('Failed to register user');
+    } finally {
+      isLoading.value = false;
     }
+  }
+
+  Future<void> updateUserAddress(UserModel user, String addressID) async {
+    try {
+      await usersRef.doc(user.id).update({'defaultAddressID': addressID});
+
+      _user.value = _user.value!.copyWith(defaultAddressID: addressID);
+      _storageService.saveUserData(_user.value!);
+    } catch (e) {
+      _handleError('Failed to update user address: $e');
+    }
+  }
+
+  void _handleError(String message) {
+    Get.snackbar('Error', message);
+  }
+
+  void clearUserData() {
+    _user.value = null;
+    _storageService.clearUserData();
   }
 }

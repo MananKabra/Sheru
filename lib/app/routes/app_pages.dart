@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
-import 'package:get_flutter_fire/app/modules/auth/bindings/auth_bindings.dart';
+import 'package:get_flutter_fire/app/modules/auth/views/address_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/login_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/otp_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/register_screen.dart';
-import 'package:get_flutter_fire/app/modules/home/home_screen.dart';
+import 'package:get_flutter_fire/app/modules/auth/views/welcome_screen.dart';
+import 'package:get_flutter_fire/app/modules/home/root_view.dart';
 import 'package:get_flutter_fire/app/modules/splash/splash_screen.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
 
@@ -18,23 +19,31 @@ class AppPages {
       page: () => const SplashScreen(),
     ),
     GetPage(
+      name: Routes.WELCOME,
+      page: () => const WelcomeScreen(),
+    ),
+    GetPage(
       name: Routes.LOGIN,
       page: () => const LoginScreen(),
-      binding: AuthBindings(),
     ),
     GetPage(
       name: Routes.OTP,
-      page: () => const OtpScreen(),
-      binding: AuthBindings(),
+      page: () => OtpScreen(phoneNumber: Get.arguments['phoneNumber']),
     ),
     GetPage(
       name: Routes.REGISTER,
-      page: () => const RegisterScreen(),
-      binding: AuthBindings(),
+      page: () => RegisterScreen(
+        phoneNumber: Get.arguments['phoneNumber'],
+      ),
     ),
     GetPage(
-      name: Routes.HOME,
-      page: () => const HomeScreen(),
+      name: Routes.ADDRESS,
+      page: () => AddressScreen(),
+    ),
+    GetPage(
+      name: Routes.ROOT,
+      page: () => RootView(),
+      // binding: AuthBindings(),
     ),
   ];
 }

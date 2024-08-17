@@ -27,6 +27,8 @@ dependencies:
   pin_code_fields: ^8.0.1
   uuid: ^4.4.2
   cloud_functions: ^4.7.6
+  fluttertoast: ^8.2.8
+  flutter_easyloading: ^3.0.5
 
 dev_dependencies:
   flutter_lints: 3.0.2
@@ -42,4 +44,7 @@ flutter:
     - assets/images/flutterfire_300x.png
     - assets/images/dash.png
     - assets/icons/logo.png
+    - assets/animations/
+    - assets/images/
+    - assets/icons/
   uses-material-design: true
