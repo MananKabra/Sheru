@@ -28,7 +28,6 @@ class _SplashScreenState extends State<SplashScreen> {
         Get.offNamed(Routes.ROOT);
       } else {
         showToast("Welcome", isShort: true);
-
         Get.offNamed(Routes.WELCOME);
       }
     });

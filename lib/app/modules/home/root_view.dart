@@ -4,6 +4,7 @@ import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.da
 import 'package:get_flutter_fire/app/modules/home/controllers/root_controller.dart';
 import 'package:get_flutter_fire/app/modules/home/home_screen.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
+import 'package:get_flutter_fire/enums/enums.dart';
 import 'package:get_flutter_fire/models/user_model.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
 
@@ -43,7 +44,7 @@ class RootView extends StatelessWidget {
         leading: null,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: Colors.white),
             onPressed: () {
               authController.clearUserData();
               Get.offAllNamed(Routes.WELCOME);

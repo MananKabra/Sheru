@@ -57,14 +57,18 @@ class RegisterScreen extends StatelessWidget {
                       readOnly: true,
                       controller: TextEditingController(text: phoneNumber),
                     ),
-                    const Divider(height: 40, thickness: 1),
-                    const Spacing(size: AppTheme.spacingSmall),
+                    const Spacing(size: AppTheme.spacingMedium),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Text('Are you a Business?',
                             style: AppTheme.fontStyleMedium),
                         Obx(() => Switch(
+                              activeColor: Colors.white,
+                              inactiveTrackColor: Colors.white,
+                              inactiveThumbColor: Colors.red,
+                              activeTrackColor: AppTheme.colorRed,
+                              trackOutlineColor: null,
                               value: controller.isBusiness.value,
                               onChanged: controller.toggleBusiness,
                             )),
@@ -105,7 +109,7 @@ class RegisterScreen extends StatelessWidget {
                             ],
                           ),
                         )),
-                    const Spacing(size: AppTheme.spacingExtraLarge),
+                    const Spacing(size: AppTheme.spacingLarge),
                     CustomButton(
                       onPressed: () {
                         controller.registerUser(phoneNumber);

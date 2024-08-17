@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
+import 'package:get_flutter_fire/enums/enums.dart';
 import 'package:get_flutter_fire/models/user_model.dart';
 import 'package:get_flutter_fire/services/auth_service.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
