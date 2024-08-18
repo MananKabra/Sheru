@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
 import 'package:get_flutter_fire/app/modules/cart/views/cart_root_view.dart';
 import 'package:get_flutter_fire/app/modules/home/view/home.dart';
+import 'package:get_flutter_fire/app/modules/orders/views/orders.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/profile.dart';
 import 'package:get_flutter_fire/app/modules/root/controllers/root_controller.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
@@ -116,7 +117,7 @@ class RootView extends StatelessWidget {
 
     final sellerTabs = <Widget>[
       const HomeScreen(),
-      const Center(child: Text('Cart')),
+      const OrdersScreen(),
       const ProfileScreen(),
       const Center(child: Text('Manage Products')),
     ];
@@ -164,7 +165,7 @@ class RootView extends StatelessWidget {
     final items = <BottomNavigationBarItem>[
       const BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
       const BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart), label: 'Cart'),
+          icon: Icon(Icons.shopping_cart), label: 'Orders'),
       const BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
     ];
 

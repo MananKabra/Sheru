@@ -5,6 +5,8 @@ import 'package:get_flutter_fire/app/modules/auth/views/otp_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/register_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/welcome_screen.dart';
 import 'package:get_flutter_fire/app/modules/cart/views/cart_root_view.dart';
+import 'package:get_flutter_fire/app/modules/cart/views/order_confirmed.dart';
+import 'package:get_flutter_fire/app/modules/orders/views/order_detail_screen.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/account_detail.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/add_addresses.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/contact_support.dart';
@@ -78,6 +80,15 @@ class AppPages {
     GetPage(
       name: Routes.CART,
       page: () => const CartRootView(),
+    ),
+    //Order
+    GetPage(
+      name: Routes.ORDER_CONFIRMED,
+      page: () => const OrderConfirmedScreen(),
+    ),
+    GetPage(
+      name: Routes.ORDER_DETAILS,
+      page: () => const OrderDetailScreen(),
     ),
   ];
 }

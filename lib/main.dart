@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
 import 'package:get_flutter_fire/app/modules/cart/controllers/cart_controller.dart';
+import 'package:get_flutter_fire/app/modules/cart/controllers/order_controller.dart';
+import 'package:get_flutter_fire/app/modules/cart/controllers/product_controller.dart';
 import 'package:get_flutter_fire/app/modules/profile/controllers/address_controller.dart';
 import 'package:get_flutter_fire/app/routes/app_pages.dart';
 import 'package:get_flutter_fire/constants.dart';
@@ -41,6 +43,8 @@ void main() async {
           Get.put(AuthController());
           Get.put(AddressController());
           Get.put(CartController());
+          Get.put(OrderController());
+          Get.put(ProductController());
         },
       ),
       theme: ThemeData(

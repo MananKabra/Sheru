@@ -124,7 +124,8 @@ class CartController extends GetxController {
       await firestore.collection('orders').doc(order.id).set(order.toMap());
       clearCart();
       Get.snackbar('Success', 'Order placed successfully');
-      Get.toNamed(Routes.ROOT);
+
+      Get.offAllNamed(Routes.ORDER_CONFIRMED, arguments: order.id);
     } catch (e) {
       Get.snackbar('Error', 'Failed to place order: $e');
     }

@@ -15,6 +15,10 @@ abstract class Routes {
   static const PAST_QUERIES = _Paths.PAST_QUERIES;
   //Cart Routes
   static const CART = _Paths.CART;
+
+  //Order
+  static const ORDER_CONFIRMED = _Paths.ORDER_CONFIRMED;
+  static const ORDER_DETAILS = _Paths.ORDER_DETAILS;
 }
 
 abstract class _Paths {
@@ -33,4 +37,8 @@ abstract class _Paths {
   static const PAST_QUERIES = '/past_queries';
   //Cart Routes
   static const CART = '/cart';
+
+  //Order
+  static const ORDER_CONFIRMED = '/order_confirmed';
+  static const ORDER_DETAILS = '/order_details';
 }
