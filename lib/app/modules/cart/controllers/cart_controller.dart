@@ -29,6 +29,10 @@ class CartController extends GetxController {
   }
 
   void changePageIndex(int newIndex) {
+    if (newIndex == 1 && _cart.value.itemCount == 0) {
+      Get.snackbar('Cart Empty', 'Please add some items to your cart');
+      return;
+    }
     if (newIndex != _pageIndex.value) {
       _pageIndex.value = newIndex;
     }

@@ -36,6 +36,13 @@ class CartRootView extends StatelessWidget {
     void onBottomButtonPressed() async {
       switch (cartController.pageIndex) {
         case 0:
+          if (cartController.cart.itemCount == 0) {
+            Get.snackbar(
+              'Cart Empty',
+              'Please add some items to your cart',
+            );
+            return;
+          }
           if (cartController.selectedAddress.isEmpty) {
             cartController.selectAddress(
                 Get.find<AuthController>().user!.defaultAddressID);
