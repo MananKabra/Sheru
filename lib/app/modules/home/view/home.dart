@@ -1,11 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
 import 'package:get_flutter_fire/app/modules/home/controllers/home_controller.dart';
 import 'package:get_flutter_fire/app/widgets/common/overlay_loader.dart';
 import 'package:get_flutter_fire/app/widgets/common/secondary_button.dart';
 import 'package:get_flutter_fire/app/widgets/common/spacing.dart';
+import 'package:get_flutter_fire/models/banner_model.dart';
+import 'package:get_flutter_fire/models/category_model.dart';
+import 'package:get_flutter_fire/models/product_model.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,9 +25,12 @@ class HomeScreen extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: [
-                _buildCarousel(homeController),
-                _buildCategories(homeController),
+                const Spacing(size: AppTheme.spacingMedium),
+                _buildCarousel(homeController.banners),
+                _buildCategories(homeController.categories),
                 _buildOffers(homeController),
+                _buildProducts(
+                    homeController.products, MediaQuery.of(context).size),
                 // ElevatedButton(
                 //   onPressed: () async {
                 //     final offer = OfferModel(
@@ -52,16 +57,6 @@ class HomeScreen extends StatelessWidget {
                 //   ),
                 //   child: const Text('Upload Offer for Mumbai'),
                 // ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    'Welcome, ${Get.find<AuthController>().user!.name}',
-                    style: AppTheme.fontStyleLarge.copyWith(
-                      color: AppTheme.colorBlack,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
               ],
             ),
           );
@@ -70,7 +65,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCarousel(HomeController homeController) {
+  Widget _buildCarousel(List<BannerModel> banners) {
     return CarouselSlider(
       options: CarouselOptions(
         height: 200.0,
@@ -79,7 +74,7 @@ class HomeScreen extends StatelessWidget {
         aspectRatio: 16 / 9,
         viewportFraction: 0.8,
       ),
-      items: homeController.banners.map((banner) {
+      items: banners.map((banner) {
         return Builder(
           builder: (BuildContext context) {
             return Container(
@@ -98,7 +93,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildCategories(HomeController homeController) {
+  Widget _buildCategories(List<CategoryModel> categories) {
     return Padding(
       padding: AppTheme.paddingDefault,
       child: Column(
@@ -124,9 +119,9 @@ class HomeScreen extends StatelessWidget {
             height: 100,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: homeController.categories.length,
+              itemCount: categories.length,
               itemBuilder: (context, index) {
-                final category = homeController.categories[index];
+                final category = categories[index];
                 return Column(
                   children: [
                     Container(
@@ -155,6 +150,233 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProducts(List<ProductModel> products, Size size) {
+    return Padding(
+      padding: AppTheme.paddingDefault,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Products",
+                style: AppTheme.fontStyleLarge.copyWith(
+                  color: AppTheme.colorBlack,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SecondaryButton(
+                label: "See All",
+                onPressed: () {},
+              ),
+            ],
+          ),
+          const Spacing(size: AppTheme.fontSizeDefault),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: products.length ~/ 2,
+            itemBuilder: (context, index) {
+              final productLeft = products[index * 2];
+              final productRight = products[index * 2 + 1];
+
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: 150,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 150.0,
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            image: DecorationImage(
+                              image: NetworkImage(productLeft.images.first),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          productLeft.name,
+                          style: AppTheme.fontStyleHeadingDefault.copyWith(
+                            color: AppTheme.colorBlack,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          productLeft.description,
+                          style: AppTheme.fontStyleDefault.copyWith(
+                            color: AppTheme.greyTextColor,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          "Rs. ${productLeft.unitPrice}",
+                          style: AppTheme.fontStyleDefault.copyWith(
+                            color: AppTheme.colorBlack,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Container(
+                          width: 150.0,
+                          height: 40.0,
+                          decoration: AppTheme.cardDecoration.copyWith(
+                            color: AppTheme.colorRed,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Add to cart',
+                              style: AppTheme.fontStyleDefault.copyWith(
+                                color: AppTheme.colorWhite,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingMedium),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 150,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 150.0,
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            image: DecorationImage(
+                              image: NetworkImage(productRight.images.first),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          productRight.name,
+                          style: AppTheme.fontStyleHeadingDefault.copyWith(
+                            color: AppTheme.colorBlack,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          productRight.description,
+                          style: AppTheme.fontStyleDefault.copyWith(
+                            color: AppTheme.greyTextColor,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          "Rs. ${productRight.unitPrice}",
+                          style: AppTheme.fontStyleDefault.copyWith(
+                            color: AppTheme.colorBlack,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Container(
+                          width: 150.0,
+                          height: 40.0,
+                          decoration: AppTheme.cardDecoration.copyWith(
+                            color: AppTheme.colorRed,
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Add to cart',
+                              style: AppTheme.fontStyleDefault.copyWith(
+                                color: AppTheme.colorWhite,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingMedium),
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+          if (products.length % 2 != 0)
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: 150.0,
+                  height: 150.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    image: DecorationImage(
+                      image: NetworkImage(products.last.images.first),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const Spacing(size: AppTheme.spacingTiny),
+                Text(
+                  products.last.name,
+                  style: AppTheme.fontStyleHeadingDefault.copyWith(
+                    color: AppTheme.colorBlack,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacing(size: AppTheme.spacingTiny),
+                Text(
+                  products.last.description,
+                  style: AppTheme.fontStyleDefault.copyWith(
+                    color: AppTheme.greyTextColor,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Spacing(size: AppTheme.spacingTiny),
+                Text(
+                  "Rs. ${products.last.unitPrice}",
+                  style: AppTheme.fontStyleDefault.copyWith(
+                    color: AppTheme.colorBlack,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Spacing(size: AppTheme.spacingTiny),
+                Container(
+                  width: 150.0,
+                  height: 40.0,
+                  decoration: AppTheme.cardDecoration.copyWith(
+                    color: AppTheme.colorRed,
+                  ),
+                  child: Center(
+                    child: Text(
+                      'Add to cart',
+                      style: AppTheme.fontStyleDefault.copyWith(
+                        color: AppTheme.colorWhite,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const Spacing(size: AppTheme.spacingMedium),
+              ],
+            ),
         ],
       ),
     );

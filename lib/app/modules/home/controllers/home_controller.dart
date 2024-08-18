@@ -6,11 +6,13 @@ import 'package:get_flutter_fire/models/banner_model.dart';
 import 'package:get_flutter_fire/models/category_model.dart';
 import 'package:get_flutter_fire/models/offer_model.dart';
 import 'package:get_flutter_fire/models/address_model.dart';
+import 'package:get_flutter_fire/models/product_model.dart';
 
 class HomeController extends GetxController {
   RxList<BannerModel> banners = <BannerModel>[].obs;
   RxList<CategoryModel> categories = <CategoryModel>[].obs;
   RxList<OfferModel> offers = <OfferModel>[].obs;
+  RxList<ProductModel> products = <ProductModel>[].obs;
   RxBool isLoading = true.obs;
   RxInt currentCarouselIndex = 0.obs;
 
@@ -27,6 +29,7 @@ class HomeController extends GetxController {
         fetchBanners(),
         fetchCategories(),
         fetchOffersForUserLocation(),
+        fetchProducts(),
       ]);
     } catch (e) {
       Get.snackbar('Error', 'An error occurred while fetching data');
@@ -96,6 +99,23 @@ class HomeController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Error', 'An error occurred while fetching offers');
+      rethrow;
+    }
+  }
+
+  Future<void> fetchProducts() async {
+    try {
+      QuerySnapshot snapshot =
+          await FirebaseFirestore.instance.collection('products').get();
+
+      List<ProductModel> fetchedProducts = snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        return ProductModel.fromMap(data);
+      }).toList();
+
+      products.value = fetchedProducts;
+    } catch (e) {
+      Get.snackbar('Error', 'An error occurred while fetching products');
       rethrow;
     }
   }
