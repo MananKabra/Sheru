@@ -5,6 +5,7 @@ import 'package:get_flutter_fire/app/modules/home/controllers/home_controller.da
 import 'package:get_flutter_fire/app/widgets/common/overlay_loader.dart';
 import 'package:get_flutter_fire/app/widgets/common/secondary_button.dart';
 import 'package:get_flutter_fire/app/widgets/common/spacing.dart';
+import 'package:get_flutter_fire/app/widgets/product/add_to_cart_button.dart';
 import 'package:get_flutter_fire/models/banner_model.dart';
 import 'package:get_flutter_fire/models/category_model.dart';
 import 'package:get_flutter_fire/models/product_model.dart';
@@ -231,22 +232,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const Spacing(size: AppTheme.spacingTiny),
-                        Container(
-                          width: 150.0,
-                          height: 40.0,
-                          decoration: AppTheme.cardDecoration.copyWith(
-                            color: AppTheme.colorRed,
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Add to cart',
-                              style: AppTheme.fontStyleDefault.copyWith(
-                                color: AppTheme.colorWhite,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
+                        AddToCartButton(product: productLeft),
                         const Spacing(size: AppTheme.spacingMedium),
                       ],
                     ),
@@ -293,22 +279,7 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         const Spacing(size: AppTheme.spacingTiny),
-                        Container(
-                          width: 150.0,
-                          height: 40.0,
-                          decoration: AppTheme.cardDecoration.copyWith(
-                            color: AppTheme.colorRed,
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Add to cart',
-                              style: AppTheme.fontStyleDefault.copyWith(
-                                color: AppTheme.colorWhite,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
+                        AddToCartButton(product: productRight),
                         const Spacing(size: AppTheme.spacingMedium),
                       ],
                     ),

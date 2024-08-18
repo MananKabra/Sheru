@@ -43,31 +43,34 @@ class RootView extends StatelessWidget {
 
   Widget _buildAppBarTitle() {
     final user = authController.user!;
-    return Row(
-      children: [
-        _getUserRoleIcon(user.userType),
-        const SizedBox(width: 8),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text('Welcome,',
-                style: TextStyle(fontSize: 14, color: Colors.white)),
-            Text(
-              user.name,
-              style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppTheme.spacingTiny),
+      child: Row(
+        children: [
+          _getUserRoleIcon(user.userType),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('Welcome,',
+                  style: TextStyle(fontSize: 14, color: Colors.white)),
+              Text(
+                user.name,
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
+            ],
+          ),
+          if (user.userType == UserType.seller) ...[
+            const SizedBox(width: 10),
+            const Icon(Icons.verified, color: Colors.yellowAccent),
           ],
-        ),
-        if (user.userType == UserType.seller) ...[
-          const SizedBox(width: 10),
-          const Icon(Icons.verified, color: Colors.yellowAccent),
         ],
-      ],
+      ),
     );
   }
 

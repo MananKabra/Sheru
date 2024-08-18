@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
+import 'package:get_flutter_fire/app/modules/cart/controllers/cart_controller.dart';
+import 'package:get_flutter_fire/app/modules/profile/controllers/address_controller.dart';
 import 'package:get_flutter_fire/app/routes/app_pages.dart';
 import 'package:get_flutter_fire/constants.dart';
 import 'package:get_flutter_fire/services/auth_service.dart';
@@ -34,8 +36,11 @@ void main() async {
       initialRoute: AppPages.INITIAL,
       initialBinding: BindingsBuilder(
         () {
+          // TODO: Handle binding later
           Get.put(AuthService());
           Get.put(AuthController());
+          Get.put(AddressController());
+          Get.put(CartController());
         },
       ),
       theme: ThemeData(

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
+import 'package:get_flutter_fire/app/modules/cart/controllers/cart_controller.dart';
 import 'package:get_flutter_fire/models/banner_model.dart';
 import 'package:get_flutter_fire/models/category_model.dart';
 import 'package:get_flutter_fire/models/offer_model.dart';
@@ -25,11 +26,14 @@ class HomeController extends GetxController {
   Future<void> _fetchAllData() async {
     isLoading(true);
     try {
+      final cartController = Get.put(CartController());
+      final authController = Get.put(AuthController());
       await Future.wait([
         fetchBanners(),
         fetchCategories(),
         fetchOffersForUserLocation(),
         fetchProducts(),
+        cartController.fetchCartData(authController.user!.id),
       ]);
     } catch (e) {
       Get.snackbar('Error', 'An error occurred while fetching data');

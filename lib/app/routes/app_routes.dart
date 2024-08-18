@@ -13,6 +13,8 @@ abstract class Routes {
   static const ADD_ADDRESS = _Paths.ADD_ADDRESS;
   static const CONTACT = _Paths.CONTACT;
   static const PAST_QUERIES = _Paths.PAST_QUERIES;
+  //Cart Routes
+  static const CART = _Paths.CART;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const ADD_ADDRESS = '/add_address';
   static const CONTACT = '/contact';
   static const PAST_QUERIES = '/past_queries';
+  //Cart Routes
+  static const CART = '/cart';
 }
