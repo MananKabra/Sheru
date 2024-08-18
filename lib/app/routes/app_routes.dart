@@ -11,6 +11,8 @@ abstract class Routes {
   static const ACCOUNT_DETAILS = _Paths.ACCOUNT_DETAILS;
   static const MANAGE_ADDRESS = _Paths.MANAGE_ADDRESS;
   static const ADD_ADDRESS = _Paths.ADD_ADDRESS;
+  static const CONTACT = _Paths.CONTACT;
+  static const PAST_QUERIES = _Paths.PAST_QUERIES;
 }
 
 abstract class _Paths {
@@ -25,4 +27,6 @@ abstract class _Paths {
   static const ACCOUNT_DETAILS = '/account_details';
   static const MANAGE_ADDRESS = '/manage_address';
   static const ADD_ADDRESS = '/add_address';
+  static const CONTACT = '/contact';
+  static const PAST_QUERIES = '/past_queries';
 }

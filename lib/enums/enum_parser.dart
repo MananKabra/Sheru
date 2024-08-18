@@ -10,3 +10,33 @@ UserType parseUserType(String userType) {
       return UserType.buyer;
   }
 }
+
+QueryType parseQueryType(String queryType) {
+  switch (queryType) {
+    case 'product':
+      return QueryType.product;
+    case 'delivery':
+      return QueryType.delivery;
+    case 'general':
+      return QueryType.general;
+    case 'payment':
+      return QueryType.payment;
+    case 'app':
+      return QueryType.app;
+    default:
+      return QueryType.general;
+  }
+}
+
+EnquiryStatus parseQueryStatus(String queryStatus) {
+  switch (queryStatus) {
+    case 'pending':
+      return EnquiryStatus.pending;
+    case 'in-progress':
+      return EnquiryStatus.inProgress;
+    case 'completed':
+      return EnquiryStatus.completed;
+    default:
+      return EnquiryStatus.pending;
+  }
+}

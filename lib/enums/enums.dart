@@ -9,3 +9,7 @@ enum AccessLevel {
   masked,
   secret
 }
+
+enum EnquiryStatus { pending, inProgress, completed }
+
+enum QueryType { product, delivery, general, payment, app }

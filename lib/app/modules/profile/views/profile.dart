@@ -55,6 +55,7 @@ class ProfileScreen extends StatelessWidget {
         'text': 'Support',
         'onTap': () {
           // router.push(Routes.support);
+          Get.toNamed(Routes.CONTACT);
         },
       },
       {

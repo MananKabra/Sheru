@@ -6,7 +6,9 @@ import 'package:get_flutter_fire/app/modules/auth/views/register_screen.dart';
 import 'package:get_flutter_fire/app/modules/auth/views/welcome_screen.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/account_detail.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/add_addresses.dart';
+import 'package:get_flutter_fire/app/modules/profile/views/contact_support.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/manage_address.dart';
+import 'package:get_flutter_fire/app/modules/profile/views/past_queries_screen.dart';
 import 'package:get_flutter_fire/app/modules/root/root_view.dart';
 import 'package:get_flutter_fire/app/modules/splash/splash_screen.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
@@ -61,6 +63,14 @@ class AppPages {
     GetPage(
       name: Routes.ADD_ADDRESS,
       page: () => AddAddressScreen(),
+    ),
+    GetPage(
+      name: Routes.CONTACT,
+      page: () => SupportScreen(),
+    ),
+    GetPage(
+      name: Routes.PAST_QUERIES,
+      page: () => PastQueriesScreen(),
     ),
   ];
 }
