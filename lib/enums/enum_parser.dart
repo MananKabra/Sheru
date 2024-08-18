@@ -40,3 +40,20 @@ EnquiryStatus parseQueryStatus(String queryStatus) {
       return EnquiryStatus.pending;
   }
 }
+
+OrderStatus parseOrderStatus(String orderStatus) {
+  switch (orderStatus) {
+    case 'placed':
+      return OrderStatus.placed;
+    case 'processed':
+      return OrderStatus.processed;
+    case 'shipped':
+      return OrderStatus.shipped;
+    case 'delivered':
+      return OrderStatus.delivered;
+    case 'cancelled':
+      return OrderStatus.cancelled;
+    default:
+      return OrderStatus.placed;
+  }
+}

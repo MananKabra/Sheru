@@ -13,3 +13,5 @@ enum AccessLevel {
 enum EnquiryStatus { pending, inProgress, completed }
 
 enum QueryType { product, delivery, general, payment, app }
+
+enum OrderStatus { placed, processed, shipped, delivered, cancelled }

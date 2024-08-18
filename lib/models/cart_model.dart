@@ -1,21 +1,21 @@
 import 'dart:convert';
 
-class Cart {
+class CartModel {
   List<CartItem> items;
   final String id;
 
-  Cart({
+  CartModel({
     required this.items,
     required this.id,
   });
 
   int get itemCount => items.length;
 
-  Cart copyWith({
+  CartModel copyWith({
     List<CartItem>? items,
     String? id,
   }) {
-    return Cart(
+    return CartModel(
       items: items ?? this.items,
       id: id ?? this.id,
     );
@@ -28,8 +28,8 @@ class Cart {
     };
   }
 
-  factory Cart.fromMap(Map<String, dynamic> map) {
-    return Cart(
+  factory CartModel.fromMap(Map<String, dynamic> map) {
+    return CartModel(
       items: List<CartItem>.from(
         map['items']?.map((x) => CartItem.fromMap(x as Map<String, dynamic>)) ??
             [],
@@ -40,8 +40,8 @@ class Cart {
 
   String toJson() => json.encode(toMap());
 
-  factory Cart.fromJson(String source) =>
-      Cart.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CartModel.fromJson(String source) =>
+      CartModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() => 'Cart(items: $items, id: $id)';

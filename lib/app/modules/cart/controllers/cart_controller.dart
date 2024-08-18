@@ -1,10 +1,12 @@
 import 'package:get/get.dart';
+import 'package:get_flutter_fire/app/routes/app_routes.dart';
 import 'package:get_flutter_fire/constants.dart';
 import 'package:get_flutter_fire/models/cart_model.dart';
+import 'package:get_flutter_fire/models/order_model.dart';
 
 class CartController extends GetxController {
-  final Rx<Cart> _cart = Cart(items: [], id: '').obs;
-  Cart get cart => _cart.value;
+  final Rx<CartModel> _cart = CartModel(items: [], id: '').obs;
+  CartModel get cart => _cart.value;
 
   int get totalPrice => _cart.value.items
       .fold(0, (total, item) => total + item.price * item.quantity);
@@ -45,7 +47,7 @@ class CartController extends GetxController {
               .toList();
         }
       }
-      _cart.value = Cart(items: cartItems, id: userID);
+      _cart.value = CartModel(items: cartItems, id: userID);
     } catch (e) {
       Get.snackbar('Error', 'An error occurred while fetching cart data');
     }
@@ -109,7 +111,18 @@ class CartController extends GetxController {
   }
 
   void clearCart() {
-    _cart.value = Cart(items: [], id: cart.id);
+    _cart.value = CartModel(items: [], id: cart.id);
     syncCartwithDB();
+  }
+
+  Future<void> placeOrder(OrderModel order) async {
+    try {
+      await firestore.collection('orders').doc(order.id).set(order.toMap());
+      clearCart();
+      Get.snackbar('Success', 'Order placed successfully');
+      Get.toNamed(Routes.ROOT);
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to place order: $e');
+    }
   }
 }
