@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
-import 'package:get_flutter_fire/app/modules/cart/views/cart_root_view.dart';
 import 'package:get_flutter_fire/app/modules/home/view/home.dart';
 import 'package:get_flutter_fire/app/modules/orders/views/orders.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/profile.dart';
@@ -111,7 +110,7 @@ class RootView extends StatelessWidget {
   Widget _getTabContent(int index) {
     final buyerTabs = <Widget>[
       const HomeScreen(),
-      const CartRootView(),
+      const OrdersScreen(),
       const ProfileScreen()
     ];
 
