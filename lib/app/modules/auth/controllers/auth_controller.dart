@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:get_flutter_fire/enums/enums.dart';
 import 'package:get_flutter_fire/models/user_model.dart';
 import 'package:get_flutter_fire/constants.dart';
 import 'package:get_flutter_fire/services/get_storage_service.dart';
+import 'package:get_flutter_fire/app/modules/seller/controllers/seller_controller.dart';
 
 class AuthController extends GetxController {
   final GetStorageService _storageService = GetStorageService();
@@ -11,7 +13,6 @@ class AuthController extends GetxController {
 
   UserModel? get user => _user.value;
 
-  // Add this property to track the current user
   Rxn<UserModel> get currentUser => _user;
 
   @override
@@ -39,6 +40,12 @@ class AuthController extends GetxController {
         if (updatedUser.userType != _user.value!.userType) {
           _user.value = updatedUser;
           _storageService.saveUserData(updatedUser);
+
+          if (updatedUser.userType == UserType.seller) {
+            final SellerController sellerController =
+                Get.put(SellerController());
+            await sellerController.onUserRoleChanged(updatedUser);
+          }
         }
       }
     } catch (error) {
@@ -55,6 +62,11 @@ class AuthController extends GetxController {
       if (doc.exists) {
         _user.value = UserModel.fromMap(doc.data()!);
         _storageService.saveUserData(_user.value!);
+
+        if (_user.value!.userType == UserType.seller) {
+          final SellerController sellerController = Get.put(SellerController());
+          await sellerController.onUserRoleChanged(_user.value!);
+        }
       }
     } catch (error) {
       _user.value = null;

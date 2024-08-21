@@ -5,6 +5,7 @@ import 'package:get_flutter_fire/app/modules/home/view/home.dart';
 import 'package:get_flutter_fire/app/modules/orders/views/orders.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/profile.dart';
 import 'package:get_flutter_fire/app/modules/root/controllers/root_controller.dart';
+import 'package:get_flutter_fire/app/modules/seller/views/seller.dart';
 import 'package:get_flutter_fire/app/routes/app_routes.dart';
 import 'package:get_flutter_fire/enums/enums.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
@@ -84,7 +85,9 @@ class RootView extends StatelessWidget {
       if (authController.user!.userType == UserType.seller)
         IconButton(
           icon: const Icon(Icons.store, color: Colors.white),
-          onPressed: () {},
+          onPressed: () {
+            // Navigate to seller-specific screens
+          },
         ),
       IconButton(
         icon: const Icon(Icons.logout, color: Colors.white),
@@ -118,7 +121,10 @@ class RootView extends StatelessWidget {
       const HomeScreen(),
       const OrdersScreen(),
       const ProfileScreen(),
-      const Center(child: Text('Manage Products')),
+      SellerPage(),
+      // const Center(
+      //     child: Text(
+      //         'Manage Products')),
     ];
 
     final userType = authController.user!.userType;

@@ -53,7 +53,7 @@ class AddressController extends GetxController {
     }
   }
 
-  void saveAddress() {
+  void saveAddress() async {
     const uuid = Uuid();
     String addressID = uuid.v4();
 
@@ -74,12 +74,19 @@ class AddressController extends GetxController {
       userID: user.id,
     );
 
-    addressesRef.doc(addressID).set(address.toMap());
-    if (user.defaultAddressID.isEmpty) {
-      authController.updateDefaultAddressID(addressID);
-    }
+    try {
+      await addressesRef.doc(addressID).set(address.toMap());
 
-    Get.offAllNamed(Routes.ROOT);
+      if (user.defaultAddressID.isEmpty) {
+        await authController.updateDefaultAddressID(addressID);
+
+        user = user.copyWith(defaultAddressID: addressID);
+      }
+
+      Get.offAllNamed(Routes.ROOT);
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to save address: $e');
+    }
   }
 
   Future<void> setDefaultAddress(AddressModel address) async {

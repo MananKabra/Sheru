@@ -12,6 +12,7 @@ class ProductModel {
   final bool isActive;
   final DateTime createdAt;
   final DateTime updatedAt;
+  final String sellerId;
   ProductModel({
     required this.id,
     required this.categoryID,
@@ -24,6 +25,7 @@ class ProductModel {
     required this.isActive,
     required this.createdAt,
     required this.updatedAt,
+    required this.sellerId,
   });
 
   ProductModel copyWith({
@@ -42,6 +44,7 @@ class ProductModel {
     bool? isActive,
     DateTime? createdAt,
     DateTime? updatedAt,
+    String? sellerId,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -55,6 +58,7 @@ class ProductModel {
       isActive: isActive ?? this.isActive,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
+      sellerId: sellerId ?? this.sellerId,
     );
   }
 
@@ -71,6 +75,7 @@ class ProductModel {
       'isActive': isActive,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
+      'sellerId': sellerId,
     };
   }
 
@@ -87,6 +92,7 @@ class ProductModel {
       isActive: map['isActive'] as bool,
       createdAt: map['createdAt'].toDate(),
       updatedAt: map['updatedAt'].toDate(),
+      sellerId: map['sellerId'] as String,
     );
   }
 
@@ -97,6 +103,6 @@ class ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, categoryID: $categoryID, images: $images, name: $name, description: $description, unitWeight: $unitWeight, unitPrice: $unitPrice, remainingQuantity: $remainingQuantity, isActive: $isActive. createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'ProductModel(id: $id, categoryID: $categoryID, images: $images, name: $name, description: $description, unitWeight: $unitWeight, unitPrice: $unitPrice, remainingQuantity: $remainingQuantity, isActive: $isActive. createdAt: $createdAt, updatedAt: $updatedAt, sellerId: $sellerId)';
   }
 }
