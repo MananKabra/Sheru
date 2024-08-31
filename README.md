@@ -2,7 +2,7 @@
 
 # Flutter Firebase E-Commerce App
 
-Welcome to the **Flutter Firebase E-Commerce App**! This application is a comprehensive and feature-rich platform for online shopping, built using Flutter and Firebase. It offers various user flows, including Guest, Buyer, Seller, and Admin. Follow the instructions below to set up the project and explore its features.
+Welcome to the **Sheru, Your Own Ecommerce Platform**! This application is made on top of the give code structure using flutter-firebase-getx. The flow and structure is maintained throught the app. For better experience and web capabilities, the admin part is made seperately as an admin panel that can be used for controlling the app.
 
 <p align="center">
    <img src="https://github.com/user-attachments/assets/fcd592ef-2f01-46a4-b018-b2fbaaf8d7c7" alt="Screenshot_3" width="300"/>
