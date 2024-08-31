@@ -139,16 +139,16 @@ The approval process within the admin panel is critical for maintaining the qual
 Here's a visual overview of the admin panel features:
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/c98f5c3f-144d-48a5-827d-31f78f34e2f6" alt="Admin Dashboard" width="450"/>
-  <img src="https://github.com/user-attachments/assets/8cac231d-81d5-475b-8140-a5be247998c7" alt="Product Management" width="450"/>
+  <img src="https://github.com/user-attachments/assets/c98f5c3f-144d-48a5-827d-31f78f34e2f6" alt="Admin Dashboard" width="600"/>
+  <img src="https://github.com/user-attachments/assets/8cac231d-81d5-475b-8140-a5be247998c7" alt="Product Management" width="600"/>
 </p>
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/aa4ee0d3-41ca-4f49-9b0e-63c8ad9acc95" alt="Seller Approvals" width="450"/>
-  <img src="https://github.com/user-attachments/assets/e2d1c5ec-5221-4ceb-a3ac-533748e7c15d" alt="Coupon Management" width="450"/>
+  <img src="https://github.com/user-attachments/assets/aa4ee0d3-41ca-4f49-9b0e-63c8ad9acc95" alt="Seller Approvals" width="600"/>
+  <img src="https://github.com/user-attachments/assets/e2d1c5ec-5221-4ceb-a3ac-533748e7c15d" alt="Coupon Management" width="600"/>
 </p>
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/394fb2f3-d930-4d38-9c89-6274b4443137" alt="Banner Management" width="450"/>
-  <img src="https://github.com/user-attachments/assets/5ea2e0ba-c193-4679-8e8b-642bd1af765f" alt="Data Export" width="450"/>
+  <img src="https://github.com/user-attachments/assets/394fb2f3-d930-4d38-9c89-6274b4443137" alt="Banner Management" width="600"/>
+  <img src="https://github.com/user-attachments/assets/5ea2e0ba-c193-4679-8e8b-642bd1af765f" alt="Data Export" width="600"/>
 </p>
 
 ## Getting Started
