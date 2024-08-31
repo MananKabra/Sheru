@@ -1,6 +1,6 @@
 ---
 
-# Flutter Firebase E-Commerce App
+# Flutter Firebase GetX - (Sheru)
 
 Welcome to the **Sheru, Your Own Ecommerce Platform**! This application is made on top of the give code structure using flutter-firebase-getx. The flow and structure is maintained throught the app. For better experience and web capabilities, the admin part is made seperately as an admin panel that can be used for controlling the app.
 
