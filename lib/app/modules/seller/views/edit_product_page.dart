@@ -34,7 +34,7 @@ class EditProductPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit Product'),
-        backgroundColor: AppTheme.colorRed,
+        backgroundColor: AppTheme.colorMain,
       ),
       body: SafeArea(
         child: Padding(
@@ -99,7 +99,7 @@ class EditProductPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.colorRed,
+                    backgroundColor: AppTheme.colorMain,
                     minimumSize: const Size.fromHeight(50),
                   ),
                   child: const Text('Update Product'),

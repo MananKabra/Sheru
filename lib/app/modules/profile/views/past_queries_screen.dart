@@ -92,12 +92,12 @@ class PastQueriesScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(6.0),
                                           border: Border.all(
-                                              color: AppTheme.colorRed),
+                                              color: AppTheme.colorMain),
                                         ),
                                         child: Text(enquiry.queryType.name,
                                             style: AppTheme.fontStyleDefault
                                                 .copyWith(
-                                              color: AppTheme.colorRed,
+                                              color: AppTheme.colorMain,
                                             )),
                                       ),
                                       const Spacing(
@@ -138,10 +138,10 @@ class PastQueriesScreen extends StatelessWidget {
           child: Container(
             padding: AppTheme.paddingSmall,
             decoration: BoxDecoration(
-              color: isSelected ? AppTheme.colorRed : AppTheme.colorWhite,
+              color: isSelected ? AppTheme.colorMain : AppTheme.colorWhite,
               borderRadius: BorderRadius.circular(12.0),
               border: Border.all(
-                color: isSelected ? AppTheme.colorRed : AppTheme.greyTextColor,
+                color: isSelected ? AppTheme.colorMain : AppTheme.greyTextColor,
               ),
             ),
             child: Center(

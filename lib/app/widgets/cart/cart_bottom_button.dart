@@ -27,7 +27,7 @@ class CartBottomButton extends StatelessWidget {
             boxShadow: AppTheme.cardBoxShadow,
           ),
           child: Material(
-            color: disabled ? AppTheme.backgroundColor : AppTheme.colorRed,
+            color: disabled ? AppTheme.backgroundColor : AppTheme.colorMain,
             borderRadius: AppTheme.borderRadius,
             child: InkWell(
               onTap: disabled ? null : onPressed,
@@ -50,7 +50,7 @@ class CartBottomButton extends StatelessWidget {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(4.0),
-                          color: AppTheme.colorRed,
+                          color: AppTheme.colorMain,
                         ),
                         padding: AppTheme.paddingTiny,
                         child: Text(

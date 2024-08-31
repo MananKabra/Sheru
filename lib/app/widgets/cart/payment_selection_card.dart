@@ -46,7 +46,7 @@ class PaymentMethodSelectionCard extends StatelessWidget {
                   },
                   fillColor: WidgetStateProperty.resolveWith<Color>((states) {
                     if (states.contains(WidgetState.selected)) {
-                      return AppTheme.colorRed;
+                      return AppTheme.colorMain;
                     }
                     return Colors.grey;
                   }),

@@ -10,11 +10,23 @@ import 'package:get_flutter_fire/app/widgets/profile/address_container.dart';
 import 'package:get_flutter_fire/models/address_model.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
 
-class ManageAddressScreen extends StatelessWidget {
-  ManageAddressScreen({super.key});
+class ManageAddressScreen extends StatefulWidget {
+  const ManageAddressScreen({super.key});
 
+  @override
+  State<ManageAddressScreen> createState() => _ManageAddressScreenState();
+}
+
+class _ManageAddressScreenState extends State<ManageAddressScreen> {
   final AddressController addressController = Get.put(AddressController());
+
   final AuthController authController = Get.find<AuthController>();
+
+  @override
+  void initState() {
+    super.initState();
+    addressController.fetchAddresses();
+  }
 
   @override
   Widget build(BuildContext context) {

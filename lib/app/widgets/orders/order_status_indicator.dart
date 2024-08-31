@@ -44,9 +44,9 @@ class OrderStatusIndicatorState extends State<OrderStatusIndicator>
 
   Color _getBarColor(OrderStatus status, int index) {
     if (index <= status.index) {
-      return AppTheme.colorYellow;
+      return AppTheme.colorMain;
     }
-    return AppTheme.backgroundColor;
+    return AppTheme.greyTextColor;
   }
 
   @override

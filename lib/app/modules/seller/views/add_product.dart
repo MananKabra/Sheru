@@ -25,7 +25,7 @@ class AddProductPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Product'),
-        backgroundColor: AppTheme.colorRed,
+        backgroundColor: AppTheme.colorMain,
       ),
       body: SafeArea(
         child: Padding(
@@ -76,7 +76,6 @@ class AddProductPage extends StatelessWidget {
                           'Please fill all fields and add at least one image.');
                       return;
                     }
-
                     sellerController.addSellerProduct(
                       name: nameController.text,
                       description: descriptionController.text,
@@ -89,10 +88,14 @@ class AddProductPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.colorRed,
+                    backgroundColor: AppTheme.colorMain,
                     minimumSize: const Size.fromHeight(50),
                   ),
-                  child: const Text('Add Product'),
+                  child: Text(
+                    'Add Product',
+                    style: AppTheme.fontStyleMedium
+                        .copyWith(color: AppTheme.colorWhite),
+                  ),
                 ),
               ],
             ),

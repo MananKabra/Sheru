@@ -9,7 +9,6 @@ import 'package:get_flutter_fire/app/modules/cart/views/order_confirmed.dart';
 import 'package:get_flutter_fire/app/modules/orders/views/order_detail_screen.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/account_detail.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/add_addresses.dart';
-import 'package:get_flutter_fire/app/modules/profile/views/contact_support.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/manage_address.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/past_queries_screen.dart';
 import 'package:get_flutter_fire/app/modules/root/root_view.dart';
@@ -61,16 +60,13 @@ class AppPages {
     ),
     GetPage(
       name: Routes.MANAGE_ADDRESS,
-      page: () => ManageAddressScreen(),
+      page: () => const ManageAddressScreen(),
     ),
     GetPage(
       name: Routes.ADD_ADDRESS,
       page: () => AddAddressScreen(),
     ),
-    GetPage(
-      name: Routes.CONTACT,
-      page: () => SupportScreen(),
-    ),
+
     GetPage(
       name: Routes.PAST_QUERIES,
       page: () => PastQueriesScreen(),

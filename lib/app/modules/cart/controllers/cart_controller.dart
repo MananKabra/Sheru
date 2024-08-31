@@ -41,7 +41,7 @@ class CartController extends GetxController {
   Future<void> fetchCartData(String userID) async {
     try {
       List<CartItem> cartItems = [];
-      final snapshot = await firestore.collection('carts').doc(userID).get();
+      final snapshot = await db.collection('carts').doc(userID).get();
       if (snapshot.exists) {
         Map<String, dynamic> cartData = snapshot.data() as Map<String, dynamic>;
         if (cartData.containsKey('cartItems')) {
@@ -108,7 +108,7 @@ class CartController extends GetxController {
   Future<void> syncCartwithDB() async {
     List<Map<String, dynamic>> cartItemsData =
         _cart.value.items.map((item) => item.toMap()).toList();
-    await firestore
+    await db
         .collection('carts')
         .doc(_cart.value.id)
         .set({'cartItems': cartItemsData, 'id': _cart.value.id});
@@ -121,7 +121,7 @@ class CartController extends GetxController {
 
   Future<void> placeOrder(OrderModel order) async {
     try {
-      await firestore.collection('orders').doc(order.id).set(order.toMap());
+      await db.collection('orders').doc(order.id).set(order.toMap());
       clearCart();
       Get.snackbar('Success', 'Order placed successfully');
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
+import 'package:get_flutter_fire/app/modules/cart/controllers/cart_controller.dart';
 import 'package:get_flutter_fire/app/modules/home/view/home.dart';
 import 'package:get_flutter_fire/app/modules/orders/views/orders.dart';
 import 'package:get_flutter_fire/app/modules/profile/views/profile.dart';
@@ -38,7 +39,7 @@ class RootView extends StatelessWidget {
   AppBar _buildAppBar() {
     return AppBar(
       title: _buildAppBarTitle(),
-      backgroundColor: AppTheme.colorRed,
+      backgroundColor: AppTheme.colorMain,
       actions: _buildAppBarActions(),
     );
   }
@@ -49,12 +50,11 @@ class RootView extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: AppTheme.spacingTiny),
       child: Row(
         children: [
-          _getUserRoleIcon(user.userType),
           const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Welcome,',
+              const Text('Welcome to Sheru,',
                   style: TextStyle(fontSize: 14, color: Colors.white)),
               Text(
                 user.name,
@@ -67,10 +67,6 @@ class RootView extends StatelessWidget {
               ),
             ],
           ),
-          if (user.userType == UserType.seller) ...[
-            const SizedBox(width: 10),
-            const Icon(Icons.verified, color: Colors.yellowAccent),
-          ],
         ],
       ),
     );
@@ -80,34 +76,21 @@ class RootView extends StatelessWidget {
     return [
       IconButton(
         icon: const Icon(Icons.shopping_cart, color: Colors.white),
-        onPressed: () {},
+        onPressed: () {
+          final cartController = Get.find<CartController>();
+          if (cartController.cart.itemCount == 0) {
+            Get.snackbar('Cart', 'Cart is empty');
+            return;
+          }
+          Get.toNamed(Routes.CART);
+        },
       ),
       if (authController.user!.userType == UserType.seller)
         IconButton(
           icon: const Icon(Icons.store, color: Colors.white),
-          onPressed: () {
-            // Navigate to seller-specific screens
-          },
+          onPressed: () {},
         ),
-      IconButton(
-        icon: const Icon(Icons.logout, color: Colors.white),
-        onPressed: () {
-          authController.clearUserData();
-          Get.offAllNamed(Routes.WELCOME);
-        },
-      ),
     ];
-  }
-
-  Widget _getUserRoleIcon(UserType userType) {
-    return CircleAvatar(
-      backgroundColor: Colors.white,
-      child: Icon(
-        userType == UserType.seller ? Icons.storefront : Icons.shopping_bag,
-        color: AppTheme.colorRed,
-        size: 28,
-      ),
-    );
   }
 
   Widget _getTabContent(int index) {
@@ -122,9 +105,6 @@ class RootView extends StatelessWidget {
       const OrdersScreen(),
       const ProfileScreen(),
       SellerPage(),
-      // const Center(
-      //     child: Text(
-      //         'Manage Products')),
     ];
 
     final userType = authController.user!.userType;
@@ -212,12 +192,12 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
             Container(
               height: 4,
               width: 40,
-              color: AppTheme.colorRed,
+              color: AppTheme.colorMain,
             ),
           const SizedBox(height: AppTheme.spacingTiny),
           IconTheme(
             data: IconThemeData(
-              color: isSelected ? AppTheme.colorRed : AppTheme.greyTextColor,
+              color: isSelected ? AppTheme.colorMain : AppTheme.greyTextColor,
               size: 28,
             ),
             child: icon,
@@ -226,7 +206,7 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
           Text(
             label,
             style: TextStyle(
-              color: isSelected ? AppTheme.colorRed : AppTheme.greyTextColor,
+              color: isSelected ? AppTheme.colorMain : AppTheme.greyTextColor,
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
             ),
           ),

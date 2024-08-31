@@ -1,11 +1,13 @@
+import 'dart:io';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get_flutter_fire/constants.dart';
 import 'package:get_flutter_fire/enums/enums.dart';
 import 'package:get_flutter_fire/models/product_model.dart';
 import 'package:get_flutter_fire/models/seller_model.dart';
 import 'package:get_flutter_fire/models/user_model.dart';
 import 'package:get_flutter_fire/services/auth_service.dart';
-import 'package:uuid/uuid.dart';
+import 'package:get_flutter_fire/utils/get_uuid.dart';
 
 class SellerController extends GetxController {
   final AuthService authService = Get.find<AuthService>();
@@ -71,6 +73,20 @@ class SellerController extends GetxController {
     }
   }
 
+  Future<List<String>> _uploadImages(List<String> images) async {
+    List<String> imageUrls = [];
+    for (var image in images) {
+      final productId = getUUID();
+      final storageRef = firebaseStorage.ref();
+      final imagesRef = storageRef.child('products/$productId.png');
+      await imagesRef.putFile(File(image));
+      final imageUrl = await imagesRef.getDownloadURL();
+      imageUrls.add(imageUrl);
+    }
+
+    return imageUrls;
+  }
+
   Future<void> addSellerProduct({
     required String name,
     required String description,
@@ -81,20 +97,23 @@ class SellerController extends GetxController {
   }) async {
     isLoading.value = true;
     try {
-      final productId = const Uuid().v4();
+      final productId = getUUID();
+      final imagesLinks = await _uploadImages(images);
       final newProduct = ProductModel(
         id: productId,
-        categoryID: 'default_category',
+        categoryID: 'eef6bb5d-b07a-4ec1-bf0d-91636580ca90',
         name: name,
         description: description,
         unitPrice: unitPrice,
         remainingQuantity: remainingQuantity,
         unitWeight: unitWeight,
-        images: images,
+        images: imagesLinks,
         isActive: true,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         sellerId: sellerId,
+        isApproved: false,
+        isSheruSpecial: false,
       );
 
       await FirebaseFirestore.instance
@@ -123,7 +142,7 @@ class SellerController extends GetxController {
     try {
       final updatedProduct = ProductModel(
         id: id,
-        categoryID: 'default_category',
+        categoryID: 'eef6bb5d-b07a-4ec1-bf0d-91636580ca90',
         name: name,
         description: description,
         unitPrice: unitPrice,
@@ -134,6 +153,8 @@ class SellerController extends GetxController {
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
         sellerId: sellerId,
+        isApproved: false,
+        isSheruSpecial: false,
       );
 
       await FirebaseFirestore.instance

@@ -52,6 +52,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     logo,
                     height: 94,
                     width: 94,
+                    color: AppTheme.colorMain,
                   ),
                 ),
               )),
@@ -89,7 +90,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               TextSpan(
                                 text: 'Explore Now',
                                 style: const TextStyle(
-                                  color: Colors.red,
+                                  color: AppTheme.colorMain,
                                   fontWeight: FontWeight.bold,
                                   decoration: TextDecoration.underline,
                                 ),

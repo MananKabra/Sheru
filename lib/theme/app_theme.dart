@@ -11,7 +11,7 @@ class AppTheme {
   static const Color backgroundColor = Color(0xffF2F2F3);
   static const Color borderColor = Color(0xffDCDCE0);
   static const Color colorDisabled = Color(0xFFCFCFCF);
-  static const Color colorRed = Color(0xffED0000);
+  static const Color colorMain = Color(0xff1B499C);
 
   //Font Size
   static const double fontSizeSmall = 12.0;
@@ -77,7 +77,7 @@ class AppTheme {
     fontFamily: 'Nexa-Bold',
     fontSize: fontSizeLarge,
     fontWeight: FontWeight.w400,
-    color: colorRed,
+    color: colorMain,
   );
 
   // Padding
@@ -139,8 +139,8 @@ class AppTheme {
   );
 
   // Decorations
-  static BoxDecoration cardDecoration = BoxDecoration(
-      borderRadius: borderRadius, border: cardBorder, color: colorWhite);
+  static BoxDecoration cardDecoration =
+      BoxDecoration(borderRadius: borderRadius, color: colorWhite);
 
   // Gradients
   static const LinearGradient appBarGradient = LinearGradient(

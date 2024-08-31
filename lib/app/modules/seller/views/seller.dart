@@ -165,41 +165,45 @@ class SellerPage extends StatelessWidget {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      ElevatedButton(
-                        onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  EditProductPage(product: product)),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blueAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    EditProductPage(product: product)),
                           ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 16),
-                        ),
-                        child: const Text(
-                          'Edit',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.blueAccent,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 16),
+                          ),
+                          child: const Text(
+                            'Edit',
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ),
                         ),
                       ),
                       const SizedBox(width: 8),
-                      ElevatedButton(
-                        onPressed: () =>
-                            sellerController.deleteSellerProduct(product.id),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.redAccent,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              sellerController.deleteSellerProduct(product.id),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.black,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 16),
                           ),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8, horizontal: 16),
-                        ),
-                        child: const Text(
-                          'Delete',
-                          style: TextStyle(fontSize: 14, color: Colors.white),
+                          child: const Text(
+                            'Delete',
+                            style: TextStyle(fontSize: 14, color: Colors.white),
+                          ),
                         ),
                       ),
                     ],

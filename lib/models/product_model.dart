@@ -13,6 +13,8 @@ class ProductModel {
   final DateTime createdAt;
   final DateTime updatedAt;
   final String sellerId;
+  final bool isSheruSpecial;
+  final bool isApproved;
   ProductModel({
     required this.id,
     required this.categoryID,
@@ -26,6 +28,8 @@ class ProductModel {
     required this.createdAt,
     required this.updatedAt,
     required this.sellerId,
+    required this.isSheruSpecial,
+    required this.isApproved,
   });
 
   ProductModel copyWith({
@@ -45,6 +49,8 @@ class ProductModel {
     DateTime? createdAt,
     DateTime? updatedAt,
     String? sellerId,
+    bool? isSheruSpecial,
+    bool? isApproved,
   }) {
     return ProductModel(
       id: id ?? this.id,
@@ -59,6 +65,8 @@ class ProductModel {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       sellerId: sellerId ?? this.sellerId,
+      isSheruSpecial: isSheruSpecial ?? this.isSheruSpecial,
+      isApproved: isApproved ?? this.isApproved,
     );
   }
 
@@ -76,6 +84,8 @@ class ProductModel {
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'sellerId': sellerId,
+      'isSheruSpecial': isSheruSpecial,
+      'isApproved': isApproved,
     };
   }
 
@@ -93,6 +103,8 @@ class ProductModel {
       createdAt: map['createdAt'].toDate(),
       updatedAt: map['updatedAt'].toDate(),
       sellerId: map['sellerId'] as String,
+      isSheruSpecial: map['isSheruSpecial'] as bool,
+      isApproved: map['isApproved'] as bool,
     );
   }
 
@@ -103,6 +115,6 @@ class ProductModel {
 
   @override
   String toString() {
-    return 'ProductModel(id: $id, categoryID: $categoryID, images: $images, name: $name, description: $description, unitWeight: $unitWeight, unitPrice: $unitPrice, remainingQuantity: $remainingQuantity, isActive: $isActive. createdAt: $createdAt, updatedAt: $updatedAt, sellerId: $sellerId)';
+    return 'ProductModel(id: $id, categoryID: $categoryID, images: $images, name: $name, description: $description, unitWeight: $unitWeight, unitPrice: $unitPrice, remainingQuantity: $remainingQuantity, isActive: $isActive. createdAt: $createdAt, updatedAt: $updatedAt, sellerId: $sellerId, isSheruSpecial: $isSheruSpecial, isApproved: $isApproved)';
   }
 }

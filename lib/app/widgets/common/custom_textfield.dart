@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
-
 
 class CustomTextField extends StatelessWidget {
   final String labelText;
@@ -32,7 +30,7 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(color: AppTheme.borderColor),
         ),
         focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: AppTheme.colorRed),
+          borderSide: BorderSide(color: AppTheme.colorMain),
         ),
       ),
       style: AppTheme.fontStyleDefault,

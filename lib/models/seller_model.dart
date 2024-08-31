@@ -28,6 +28,7 @@ class SellerModel extends UserModel {
     required this.products,
   });
 
+  @override
   SellerModel copyWith({
     String? sellerId,
     List<ProductModel>? products,

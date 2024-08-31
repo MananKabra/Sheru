@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_options.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
 import 'package:get_flutter_fire/app/modules/cart/controllers/cart_controller.dart';
+import 'package:get_flutter_fire/main.dart';
 import 'package:get_flutter_fire/models/banner_model.dart';
 import 'package:get_flutter_fire/models/category_model.dart';
 import 'package:get_flutter_fire/models/offer_model.dart';
@@ -21,6 +27,45 @@ class HomeController extends GetxController {
   void onInit() {
     super.onInit();
     _fetchAllData();
+    FirebaseMessaging.instance.getInitialMessage().then(
+          (value) async {},
+        );
+
+    FirebaseMessaging.onMessage.listen(showFlutterNotification);
+
+    FirebaseMessaging.onMessageOpenedApp
+        .listen((RemoteMessage message) async {});
+
+    flutterLocalNotificationsPlugin.initialize(
+      const InitializationSettings(
+        android: AndroidInitializationSettings('launch_background'),
+      ),
+      onDidReceiveNotificationResponse:
+          (NotificationResponse notificationResponse) {
+        debugPrint('Notification Received : $notificationResponse');
+      },
+    );
+  }
+
+  void showFlutterNotification(RemoteMessage message) {
+    RemoteNotification? notification = message.notification;
+    AndroidNotification? android = message.notification?.android;
+    if (notification != null && android != null) {
+      flutterLocalNotificationsPlugin.show(
+        notification.hashCode,
+        notification.title,
+        notification.body,
+        NotificationDetails(
+          android: AndroidNotificationDetails(
+            channel.id,
+            channel.name,
+            channelDescription: channel.description,
+            icon: 'launch_background',
+          ),
+        ),
+        payload: jsonEncode(message.data),
+      );
+    }
   }
 
   Future<void> _fetchAllData() async {
@@ -117,7 +162,14 @@ class HomeController extends GetxController {
         return ProductModel.fromMap(data);
       }).toList();
 
-      products.value = fetchedProducts;
+      products.value = fetchedProducts +
+          fetchedProducts +
+          fetchedProducts +
+          fetchedProducts +
+          fetchedProducts +
+          fetchedProducts +
+          fetchedProducts +
+          fetchedProducts;
     } catch (e) {
       Get.snackbar('Error', 'An error occurred while fetching products');
       rethrow;

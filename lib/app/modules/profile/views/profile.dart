@@ -51,14 +51,6 @@ class ProfileScreen extends StatelessWidget {
         'onTap': () {},
       },
       {
-        'imagePath': iconSupport,
-        'text': 'Support',
-        'onTap': () {
-          // router.push(Routes.support);
-          Get.toNamed(Routes.CONTACT);
-        },
-      },
-      {
         'imagePath': iconSignout,
         'text': 'Sign Out',
         'onTap': () async {
@@ -71,7 +63,6 @@ class ProfileScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      backgroundColor: AppTheme.colorRed,
       body: Column(
         children: [
           const Spacing(size: AppTheme.spacingMedium),
@@ -81,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: AppTheme.colorWhite,
+                    color: AppTheme.colorMain,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   width: 60,
@@ -92,7 +83,7 @@ class ProfileScreen extends StatelessWidget {
                       return Text(
                         user != null ? getInitials(user.name) : 'JD',
                         style: AppTheme.fontStyleLarge
-                            .copyWith(color: AppTheme.colorBlack),
+                            .copyWith(color: AppTheme.colorWhite),
                       );
                     }),
                   ),
@@ -106,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                       return Text(
                         user?.name ?? 'Unknown User',
                         style: AppTheme.fontStyleMedium
-                            .copyWith(color: AppTheme.colorWhite),
+                            .copyWith(color: AppTheme.colorMain),
                       );
                     }),
                     const SizedBox(height: AppTheme.spacingTiny),
@@ -115,7 +106,7 @@ class ProfileScreen extends StatelessWidget {
                       return Text(
                         user?.phoneNumber ?? '+225 123 456 789',
                         style: AppTheme.fontStyleDefault
-                            .copyWith(color: AppTheme.colorWhite),
+                            .copyWith(color: AppTheme.colorMain),
                       );
                     }),
                   ],
@@ -153,23 +144,6 @@ class ProfileScreen extends StatelessWidget {
                           ],
                         );
                       },
-                    ),
-                  ),
-                  Padding(
-                    padding: AppTheme.paddingDefault,
-                    child: RichText(
-                      text: TextSpan(
-                        style: AppTheme.fontStyleDefaultBold
-                            .copyWith(color: AppTheme.greyTextColor),
-                        children: [
-                          const TextSpan(text: 'Designed & Developed by '),
-                          TextSpan(
-                            text: 'BasedHarsh',
-                            style: AppTheme.fontStyleDefaultBold
-                                .copyWith(color: AppTheme.colorRed),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                 ],

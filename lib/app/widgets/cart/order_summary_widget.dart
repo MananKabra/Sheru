@@ -49,7 +49,7 @@ class OrderSummaryWidget extends StatelessWidget {
               Text(
                 priceDiscount.toString(),
                 style: AppTheme.fontStyleDefaultBold.copyWith(
-                  color: AppTheme.colorRed,
+                  color: AppTheme.colorMain,
                 ),
               ),
             ],
@@ -80,7 +80,7 @@ class OrderSummaryWidget extends StatelessWidget {
                 Text(
                   "-$couponDiscount",
                   style: AppTheme.fontStyleDefaultBold.copyWith(
-                    color: AppTheme.colorRed,
+                    color: AppTheme.colorMain,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

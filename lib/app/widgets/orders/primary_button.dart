@@ -25,7 +25,7 @@ class PrimaryButton extends StatelessWidget {
           ? AppTheme.backgroundColor
           : isOutlined
               ? Colors.transparent
-              : AppTheme.colorRed,
+              : AppTheme.colorMain,
       child: InkWell(
         onTap: disabled ? null : onPressed,
         child: Container(
@@ -34,7 +34,7 @@ class PrimaryButton extends StatelessWidget {
             borderRadius: AppTheme.borderRadius,
             border: isOutlined
                 ? Border.all(
-                    color: AppTheme.colorRed,
+                    color: AppTheme.colorMain,
                   )
                 : null,
           ),

@@ -6,6 +6,7 @@ import 'package:get_flutter_fire/app/widgets/common/custom_textfield.dart';
 import 'package:get_flutter_fire/app/widgets/common/spacing.dart';
 import 'package:get_flutter_fire/app/widgets/common/custom_button.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
+import 'package:get_flutter_fire/theme/assets.dart';
 
 class RegisterScreen extends StatelessWidget {
   final String phoneNumber;
@@ -18,9 +19,6 @@ class RegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: AppTheme.primaryGradient,
-        ),
         padding: AppTheme.paddingDefault,
         child: Center(
           child: SingleChildScrollView(
@@ -33,11 +31,23 @@ class RegisterScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Register',
-                      style: AppTheme.fontStyleLarge.copyWith(
-                        color: AppTheme.colorBlack,
-                        fontWeight: FontWeight.bold,
+                    Center(
+                      child: Image.asset(
+                        logo,
+                        height: 100,
+                        width: 100,
+                        color: AppTheme.colorMain,
+                      ),
+                    ),
+                    const Spacing(size: AppTheme.spacingLarge),
+                    Center(
+                      child: Text(
+                        'Register',
+                        style: AppTheme.fontStyleLarge.copyWith(
+                          color: AppTheme.colorBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     const Spacing(size: AppTheme.spacingMedium),
@@ -61,13 +71,13 @@ class RegisterScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Are you a Business?',
+                        const Text('Here for Selling?',
                             style: AppTheme.fontStyleMedium),
                         Obx(() => Switch(
                               activeColor: Colors.white,
                               inactiveTrackColor: Colors.white,
-                              inactiveThumbColor: Colors.red,
-                              activeTrackColor: AppTheme.colorRed,
+                              inactiveThumbColor: Colors.black,
+                              activeTrackColor: AppTheme.colorMain,
                               trackOutlineColor: null,
                               value: controller.isBusiness.value,
                               onChanged: controller.toggleBusiness,

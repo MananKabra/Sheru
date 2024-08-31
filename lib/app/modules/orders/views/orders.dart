@@ -120,9 +120,6 @@ class OrdersScreenState extends State<OrdersScreen> {
                         .map((product) =>
                             productController.getProductByID(product.id))
                         .toList();
-                    final productNames = products.map((p) {
-                      return p.name;
-                    }).toList();
 
                     return Padding(
                       padding:
@@ -134,6 +131,12 @@ class OrdersScreenState extends State<OrdersScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Image.network(
+                                products
+                                    .where((p) => p.id == order.products[0].id)
+                                    .first
+                                    .images[0],
+                              ),
                               RichText(
                                 text: TextSpan(
                                   children: [
@@ -171,38 +174,6 @@ class OrdersScreenState extends State<OrdersScreen> {
                                   ],
                                 ),
                               ),
-                              const Spacing(size: AppTheme.spacingTiny),
-                              if (productNames.length == 1)
-                                Text(
-                                  productNames[0],
-                                  style: AppTheme.fontStyleDefault,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              else if (productNames.length == 2)
-                                Text(
-                                  productNames.join(', '),
-                                  style: AppTheme.fontStyleDefault,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                )
-                              else if (productNames.length > 2)
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      productNames.take(2).join(', '),
-                                      style: AppTheme.fontStyleDefault,
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    Text(
-                                      '${productNames.length - 2} more products',
-                                      style: AppTheme.fontStyleDefault.copyWith(
-                                          color: AppTheme.greyTextColor),
-                                    ),
-                                  ],
-                                ),
                               const Spacing(size: AppTheme.spacingTiny),
                               Text(
                                 'Total Products: ${order.products.length}',

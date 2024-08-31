@@ -22,10 +22,10 @@ class SecondaryButton extends StatelessWidget {
         textAlign: TextAlign.center,
         style: AppTheme.fontStyleHeadingDefault.copyWith(
             fontWeight: FontWeight.bold,
-            color: disabled ? AppTheme.greyTextColor : AppTheme.colorRed,
+            color: disabled ? AppTheme.greyTextColor : AppTheme.colorMain,
             decoration: TextDecoration.underline,
             decorationColor:
-                disabled ? AppTheme.greyTextColor : AppTheme.colorRed),
+                disabled ? AppTheme.greyTextColor : AppTheme.colorMain),
       ),
     );
   }

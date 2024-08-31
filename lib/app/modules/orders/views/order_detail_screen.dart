@@ -22,7 +22,7 @@ class OrderDetailScreen extends StatelessWidget {
 
     return Scaffold(
       body: Padding(
-        padding: AppTheme.paddingSmall,
+        padding: const EdgeInsets.all(AppTheme.spacingDefault),
         child: SingleChildScrollView(
           child: Obx(() {
             if (orderController.isLoading.value) {
@@ -43,13 +43,20 @@ class OrderDetailScreen extends StatelessWidget {
                 Center(
                   child: Text(
                     "Order ${order.currentStatus.name.capitalizeFirst}",
-                    style: AppTheme.fontStyleLarge,
+                    style: AppTheme.fontStyleLarge.copyWith(
+                      color: AppTheme.colorMain,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 const SizedBox(height: AppTheme.spacingDefault),
                 const Text(
                   'Item Information',
-                  style: AppTheme.fontStyleDefaultBold,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppTheme.colorMain,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: AppTheme.spacingSmall),
                 ListView.builder(
@@ -66,14 +73,31 @@ class OrderDetailScreen extends StatelessWidget {
                     );
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingTiny),
+                const SizedBox(height: AppTheme.spacingDefault),
                 const Text(
                   'Payment Information',
-                  style: AppTheme.fontStyleDefaultBold,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppTheme.colorMain,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: AppTheme.spacingSmall),
                 Container(
-                  decoration: AppTheme.cardDecoration,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                    border: Border.all(
+                      color: AppTheme.colorMain,
+                    ),
+                  ),
                   padding: AppTheme.paddingSmall,
                   child: Row(
                     children: [
@@ -101,88 +125,83 @@ class OrderDetailScreen extends StatelessWidget {
                 const SizedBox(height: AppTheme.spacingDefault),
                 const Text(
                   'Delivery Address',
-                  style: AppTheme.fontStyleDefaultBold,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppTheme.colorMain,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: AppTheme.spacingSmall),
                 Container(
-                  decoration: AppTheme.cardDecoration,
-                  padding: AppTheme.paddingSmall,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${order.address.name} (${order.address.phoneNumber})",
-                        style: AppTheme.fontStyleDefaultBold,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3),
+                        blurRadius: 6,
+                        offset: const Offset(0, 2),
                       ),
-                      const Spacing(size: AppTheme.spacingSmall),
-                      Text(
-                        "${order.address.line1}\n${order.address.line2}",
-                        style: AppTheme.fontStyleDefault,
-                      ),
-                      const Spacing(size: AppTheme.spacingTiny),
-                      Text(
-                        "${order.address.district}, ${order.address.city}",
-                        style: AppTheme.fontStyleDefault,
-                      ),
-                      const Spacing(size: AppTheme.spacingSmall),
-                      Row(
-                        children: [
-                          const Text(
-                            "Full Name: ",
-                            style: AppTheme.fontStyleDefault,
-                          ),
-                          Text(
-                            order.address.name,
-                            style: AppTheme.fontStyleDefaultBold,
-                          ),
-                        ],
-                      ),
-                      const Spacing(size: AppTheme.spacingTiny),
-                      Row(
-                        children: [
-                          const Text(
-                            "Phone Number: ",
-                            style: AppTheme.fontStyleDefault,
-                          ),
-                          Text(
-                            order.address.phoneNumber,
-                            style: AppTheme.fontStyleDefaultBold,
-                          ),
-                        ],
-                      ),
-                      const Spacing(size: AppTheme.spacingTiny),
                     ],
+                    border: Border.all(
+                      color: AppTheme.colorMain,
+                    ),
+                  ),
+                  padding: AppTheme.paddingSmall,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${order.address.name} (${order.address.phoneNumber})",
+                          style: AppTheme.fontStyleDefaultBold,
+                        ),
+                        const Spacing(size: AppTheme.spacingSmall),
+                        Text(
+                          "${order.address.line1}\n${order.address.line2}",
+                          style: AppTheme.fontStyleDefault,
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          "${order.address.district}, ${order.address.city}",
+                          style: AppTheme.fontStyleDefault,
+                        ),
+                        const Spacing(size: AppTheme.spacingSmall),
+                      ],
+                    ),
                   ),
                 ),
                 const SizedBox(height: AppTheme.spacingDefault),
                 const Text(
                   'Order Summary',
-                  style: AppTheme.fontStyleDefaultBold,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppTheme.colorMain,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: AppTheme.spacingSmall),
-                OrderSummaryWidget(
-                  couponDiscount: order.couponDiscount,
-                  couponCode: coupon,
-                  priceDiscount: 0,
-                  subTotalPrice: order.totalPrice,
-                  totalPrice: order.totalPrice,
+                Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: AppTheme.colorMain,
+                      ),
+                      borderRadius: AppTheme.borderRadius),
+                  child: OrderSummaryWidget(
+                    couponDiscount: order.couponDiscount,
+                    couponCode: coupon,
+                    priceDiscount: 0,
+                    subTotalPrice: order.totalPrice,
+                    totalPrice: order.totalPrice,
+                  ),
                 ),
-                const SizedBox(height: AppTheme.spacingDefault),
+                const SizedBox(height: AppTheme.spacingLarge),
               ],
             );
           }),
         ),
       ),
-      // bottomNavigationBar: Obx(() {
-      //   return BottomButton(
-      //     onPressed: () => orderController.createPDF(
-      //         order: orderController.currentOrder.value!,
-      //         user: Get.find<AuthProvider>().user!,
-      //         products: productController.products),
-      //     label: 'Download Invoice',
-      //     disabled: false,
-      //   );
-      // }),
     );
   }
 }

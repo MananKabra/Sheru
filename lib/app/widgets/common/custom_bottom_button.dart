@@ -18,7 +18,7 @@ class CustomBottomButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Material(
-        color: isDisabled ? AppTheme.colorDisabled : AppTheme.colorRed,
+        color: isDisabled ? AppTheme.colorDisabled : AppTheme.colorMain,
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           onTap: isDisabled ? null : onPressed,

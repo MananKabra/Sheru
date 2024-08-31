@@ -29,18 +29,18 @@ class AddressController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
-    if (Get.arguments != null && Get.arguments.containsKey('user')) {
-      user = Get.arguments['user'] as UserModel;
-    } else {
-      user = authController.currentUser.value!;
-    }
-
     fetchAddresses();
   }
 
   Future<void> fetchAddresses() async {
     try {
+      if (Get.arguments != null && Get.arguments.containsKey('user')) {
+        user = Get.arguments['user'] as UserModel;
+      } else {
+        if (authController.currentUser.value != null) {
+          user = authController.currentUser.value!;
+        }
+      }
       final querySnapshot =
           await addressesRef.where('userID', isEqualTo: user.id).get();
 

@@ -8,7 +8,7 @@ void showToast(message, {bool isError = false, bool isShort = false}) {
       toastLength: isShort ? Toast.LENGTH_SHORT : Toast.LENGTH_LONG,
       gravity: ToastGravity.TOP,
       timeInSecForIosWeb: isShort ? 1 : 5,
-      backgroundColor: isError ? AppTheme.colorRed : AppTheme.borderColor,
+      backgroundColor: isError ? AppTheme.colorMain : AppTheme.borderColor,
       textColor: isError ? AppTheme.colorBlack : AppTheme.colorWhite,
       fontSize: AppTheme.fontSizeDefault);
 }

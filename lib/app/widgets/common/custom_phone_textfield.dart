@@ -22,14 +22,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
     return Container(
       decoration: BoxDecoration(
         color: widget.readOnly ? AppTheme.backgroundColor : Colors.transparent,
-        border: widget.readOnly
-            ? const Border(
-                bottom: BorderSide(
-                  color: AppTheme.borderColor,
-                  width: 1.0,
-                ),
-              )
-            : null,
+        border: null,
       ),
       child: widget.readOnly ? _buildReadOnlyField() : _buildEditableField(),
     );
@@ -75,7 +68,7 @@ class _PhoneTextFieldState extends State<PhoneTextField> {
       style: AppTheme.fontStyleDefault,
       controller: widget.controller,
       keyboardType: TextInputType.phone,
-      cursorColor: AppTheme.colorRed,
+      cursorColor: AppTheme.colorMain,
       maxLength: 10,
       readOnly: widget.readOnly,
       onChanged: (value) {

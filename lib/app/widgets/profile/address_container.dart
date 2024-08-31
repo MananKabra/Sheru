@@ -37,7 +37,7 @@ class AddressContainer extends StatelessWidget {
                 Text(
                   ' (Default)',
                   style: AppTheme.fontStyleDefaultBold.copyWith(
-                    color: AppTheme.colorRed,
+                    color: AppTheme.colorMain,
                   ),
                 ),
             ],
@@ -79,7 +79,7 @@ class AddressContainer extends StatelessWidget {
                   child: Text(
                     'Set as default address',
                     style: AppTheme.fontStyleDefault.copyWith(
-                      color: AppTheme.colorRed,
+                      color: AppTheme.colorMain,
                       decoration: TextDecoration.underline,
                     ),
                   ),

@@ -26,7 +26,7 @@ class SelectAddressCard extends StatelessWidget {
       child: Container(
         decoration: AppTheme.cardDecoration.copyWith(
           border: Border.all(
-            color: isSelected ? AppTheme.colorRed : AppTheme.borderColor,
+            color: isSelected ? AppTheme.colorMain : AppTheme.borderColor,
             width: 2.0,
           ),
         ),
@@ -38,7 +38,7 @@ class SelectAddressCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: AppTheme.spacingTiny),
               child: Radio<String>(
-                activeColor: AppTheme.colorRed,
+                activeColor: AppTheme.colorMain,
                 value: address.id,
                 groupValue: selectedAddressID,
                 onChanged: (value) => onSelect(address),
@@ -80,7 +80,7 @@ class SelectAddressCard extends StatelessWidget {
                     const Text(
                       'Default Address',
                       style: TextStyle(
-                        color: AppTheme.colorRed,
+                        color: AppTheme.colorMain,
                       ),
                     ),
                 ],

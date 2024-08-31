@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         decoration: BoxDecoration(
-          color: isDisabled ? AppTheme.colorDisabled : AppTheme.colorRed,
+          color: isDisabled ? AppTheme.colorDisabled : AppTheme.colorMain,
           borderRadius: BorderRadius.circular(12),
         ),
         alignment: Alignment.center,

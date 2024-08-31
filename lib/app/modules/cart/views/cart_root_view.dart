@@ -107,7 +107,7 @@ class CartRootView extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: AppTheme.borderRadius,
                                   color: cartController.pageIndex >= 0
-                                      ? AppTheme.colorRed
+                                      ? AppTheme.colorMain
                                       : AppTheme.backgroundColor,
                                 ),
                               ),
@@ -129,7 +129,7 @@ class CartRootView extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: AppTheme.borderRadius,
                                   color: cartController.pageIndex >= 1
-                                      ? AppTheme.colorRed
+                                      ? AppTheme.colorMain
                                       : AppTheme.backgroundColor,
                                 ),
                               ),
@@ -151,7 +151,7 @@ class CartRootView extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   borderRadius: AppTheme.borderRadius,
                                   color: cartController.pageIndex == 2
-                                      ? AppTheme.colorRed
+                                      ? AppTheme.colorMain
                                       : AppTheme.backgroundColor,
                                 ),
                               ),

@@ -20,24 +20,30 @@ class OtpScreen extends StatelessWidget {
         child: Padding(
           padding: AppTheme.paddingDefault,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                logo,
-                height: 64,
-                width: 64,
+              Center(
+                child: Image.asset(
+                  logo,
+                  height: 100,
+                  width: 100,
+                  color: AppTheme.colorMain,
+                ),
               ),
               const Spacing(size: AppTheme.spacingMedium),
-              Text(
-                'Enter OTP',
-                style: AppTheme.fontStyleLarge.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
+              Center(
+                child: Text(
+                  'Enter OTP',
+                  style: AppTheme.fontStyleLarge.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ),
               const Spacing(size: AppTheme.spacingSmall),
               RichText(
-                textAlign: TextAlign.left,
+                textAlign: TextAlign.center,
                 text: TextSpan(
                   children: [
                     const TextSpan(
@@ -48,7 +54,7 @@ class OtpScreen extends StatelessWidget {
                     TextSpan(
                       text: phoneNumber,
                       style: AppTheme.fontStyleDefaultBold.copyWith(
-                        color: AppTheme.colorRed,
+                        color: AppTheme.colorMain,
                         decoration: TextDecoration.underline,
                       ),
                     ),
@@ -68,7 +74,7 @@ class OtpScreen extends StatelessWidget {
                   fieldWidth: 40,
                   inactiveColor: AppTheme.greyTextColor,
                   activeColor: AppTheme.greyTextColor,
-                  selectedColor: AppTheme.colorRed,
+                  selectedColor: AppTheme.colorMain,
                 ),
                 onChanged: (value) {
                   otpController.otp.value = value;
@@ -85,9 +91,9 @@ class OtpScreen extends StatelessWidget {
                               child: Text(
                                 'Resend OTP',
                                 style: AppTheme.fontStyleDefaultBold.copyWith(
-                                    color: AppTheme.colorRed,
+                                    color: AppTheme.colorMain,
                                     decoration: TextDecoration.underline,
-                                    decorationColor: AppTheme.colorRed),
+                                    decorationColor: AppTheme.colorMain),
                               ),
                             )
                           : Row(

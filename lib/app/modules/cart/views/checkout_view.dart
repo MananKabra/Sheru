@@ -27,7 +27,7 @@ class CheckoutView extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.delete_outline,
-                      color: AppTheme.colorRed,
+                      color: AppTheme.colorMain,
                     )),
               ],
             ),

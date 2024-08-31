@@ -32,43 +32,53 @@ class LoginScreen extends StatelessWidget {
                   left: 0,
                   right: 0,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        logo,
-                        height: 64,
-                        width: 64,
+                      Center(
+                        child: Image.asset(
+                          logo,
+                          height: 100,
+                          width: 100,
+                          color: AppTheme.colorMain,
+                        ),
                       ),
                       const Spacing(size: AppTheme.spacingLarge),
-                      Text('Enter Number',
-                          style: AppTheme.fontStyleLarge.copyWith(
-                            color: AppTheme.colorBlack,
-                            fontWeight: FontWeight.bold,
-                          )),
+                      Center(
+                        child: Text('Enter Number',
+                            style: AppTheme.fontStyleLarge.copyWith(
+                              color: AppTheme.colorBlack,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
                       const SizedBox(height: 10),
-                      Obx(() => RichText(
-                            text: TextSpan(
-                              text: 'An OTP will be sent to this number: ',
-                              style: AppTheme.fontStyleSmall.copyWith(
-                                color: AppTheme.greyTextColor,
-                              ),
-                              children: [
-                                TextSpan(
-                                  text: loginController.phoneNumber.value,
-                                  style: AppTheme.fontStyleSmall.copyWith(
-                                    color: AppTheme.colorRed,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                      Obx(() => Center(
+                            child: RichText(
+                              text: TextSpan(
+                                text: 'An OTP will be sent to this number: ',
+                                style: AppTheme.fontStyleSmall.copyWith(
+                                  color: AppTheme.greyTextColor,
                                 ),
-                              ],
+                                children: [
+                                  TextSpan(
+                                    text: loginController.phoneNumber.value,
+                                    style: AppTheme.fontStyleSmall.copyWith(
+                                      color: AppTheme.colorMain,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           )),
                       const SizedBox(height: 10),
-                      PhoneTextField(
-                        hintText: 'Phone Number',
-                        readOnly: false,
-                        controller: loginController.phoneController,
+                      Container(
+                        decoration: AppTheme.cardDecoration,
+                        child: PhoneTextField(
+                          hintText: 'Phone Number',
+                          readOnly: false,
+                          controller: loginController.phoneController,
+                        ),
                       ),
                       const SizedBox(height: 20),
                       Obx(() => CustomButton(

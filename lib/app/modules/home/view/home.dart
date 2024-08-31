@@ -28,36 +28,19 @@ class HomeScreen extends StatelessWidget {
               children: [
                 const Spacing(size: AppTheme.spacingMedium),
                 _buildCarousel(homeController.banners),
+                _buildSheruProducts(
+                    homeController.products
+                        .where((product) => product.isSheruSpecial)
+                        .toList(),
+                    MediaQuery.of(context).size,
+                    'Sheru Special'),
                 _buildCategories(homeController.categories),
-                _buildOffers(homeController),
                 _buildProducts(
-                    homeController.products, MediaQuery.of(context).size),
-                // ElevatedButton(
-                //   onPressed: () async {
-                //     final offer = OfferModel(
-                //       id: 'offer2thane', // Generate or provide a unique ID
-                //       title: 'Thanekar special',
-                //       description: 'Enjoy a special discount in Jaipur.',
-                //       imageUrl: '',
-                //       city: 'Thane',
-                //       validFrom: DateTime.now(),
-                //       validTo: DateTime.now().add(
-                //           const Duration(days: 30)), // Example validity period
-                //     );
-
-                //     // Assuming you have a method to upload the offer to Firestore
-                //     await firestore.collection('offers').add(offer.toMap());
-
-                //     Get.snackbar('Success', 'Offer uploaded successfully');
-                //   },
-                //   style: ElevatedButton.styleFrom(
-                //     backgroundColor: Colors.blue, // Customize the button color
-                //     padding: const EdgeInsets.symmetric(
-                //         horizontal: 20, vertical: 15),
-                //     textStyle: const TextStyle(fontSize: 16),
-                //   ),
-                //   child: const Text('Upload Offer for Mumbai'),
-                // ),
+                    homeController.products
+                        .where((product) => product.isApproved)
+                        .toList(),
+                    MediaQuery.of(context).size,
+                    'All Products'),
               ],
             ),
           );
@@ -109,10 +92,6 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SecondaryButton(
-                label: "See All",
-                onPressed: () {},
-              ),
             ],
           ),
           const Spacing(size: AppTheme.fontSizeDefault),
@@ -156,7 +135,92 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProducts(List<ProductModel> products, Size size) {
+  Widget _buildSheruProducts(
+      List<ProductModel> products, Size size, String title) {
+    return Padding(
+      padding: AppTheme.paddingDefault,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: AppTheme.fontStyleLarge.copyWith(
+              color: AppTheme.colorBlack,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const Spacing(size: AppTheme.fontSizeDefault),
+          SizedBox(
+            height: 322,
+            child: ListView.builder(
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+
+                return Padding(
+                  padding: const EdgeInsets.only(right: AppTheme.spacingSmall),
+                  child: SizedBox(
+                    width: 150,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 150.0,
+                          height: 150.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            image: DecorationImage(
+                              image: NetworkImage(product.images.first),
+                              fit: BoxFit.contain,
+                            ),
+                          ),
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          product.name,
+                          style: AppTheme.fontStyleHeadingDefault.copyWith(
+                            color: AppTheme.colorBlack,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          product.description,
+                          style: AppTheme.fontStyleDefault.copyWith(
+                            color: AppTheme.greyTextColor,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        Text(
+                          "Rs. ${product.unitPrice}",
+                          style: AppTheme.fontStyleDefault.copyWith(
+                            color: AppTheme.colorBlack,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        const Spacing(size: AppTheme.spacingTiny),
+                        AddToCartButton(product: product),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProducts(List<ProductModel> products, Size size, String title) {
     return Padding(
       padding: AppTheme.paddingDefault,
       child: Column(
@@ -166,16 +230,16 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Products",
+                title,
                 style: AppTheme.fontStyleLarge.copyWith(
                   color: AppTheme.colorBlack,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SecondaryButton(
-                label: "See All",
-                onPressed: () {},
-              ),
+              // SecondaryButton(
+              //   label: "See All",
+              //   onPressed: () {},
+              // ),
             ],
           ),
           const Spacing(size: AppTheme.fontSizeDefault),
@@ -202,7 +266,7 @@ class HomeScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10.0),
                             image: DecorationImage(
                               image: NetworkImage(productLeft.images.first),
-                              fit: BoxFit.cover,
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
@@ -289,64 +353,52 @@ class HomeScreen extends StatelessWidget {
             },
           ),
           if (products.length % 2 != 0)
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: 150.0,
-                  height: 150.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    image: DecorationImage(
-                      image: NetworkImage(products.last.images.first),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                const Spacing(size: AppTheme.spacingTiny),
-                Text(
-                  products.last.name,
-                  style: AppTheme.fontStyleHeadingDefault.copyWith(
-                    color: AppTheme.colorBlack,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Spacing(size: AppTheme.spacingTiny),
-                Text(
-                  products.last.description,
-                  style: AppTheme.fontStyleDefault.copyWith(
-                    color: AppTheme.greyTextColor,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                const Spacing(size: AppTheme.spacingTiny),
-                Text(
-                  "Rs. ${products.last.unitPrice}",
-                  style: AppTheme.fontStyleDefault.copyWith(
-                    color: AppTheme.colorBlack,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Spacing(size: AppTheme.spacingTiny),
-                Container(
-                  width: 150.0,
-                  height: 40.0,
-                  decoration: AppTheme.cardDecoration.copyWith(
-                    color: AppTheme.colorRed,
-                  ),
-                  child: Center(
-                    child: Text(
-                      'Add to cart',
-                      style: AppTheme.fontStyleDefault.copyWith(
-                        color: AppTheme.colorWhite,
-                        fontWeight: FontWeight.bold,
+            SizedBox(
+              width: 150.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 150.0,
+                    height: 150.0,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      image: DecorationImage(
+                        image: NetworkImage(products.last.images.first),
+                        fit: BoxFit.contain,
                       ),
                     ),
                   ),
-                ),
-                const Spacing(size: AppTheme.spacingMedium),
-              ],
+                  const Spacing(size: AppTheme.spacingTiny),
+                  Text(
+                    products.last.name,
+                    style: AppTheme.fontStyleHeadingDefault.copyWith(
+                      color: AppTheme.colorBlack,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacing(size: AppTheme.spacingTiny),
+                  Text(
+                    products.last.description,
+                    style: AppTheme.fontStyleDefault.copyWith(
+                      color: AppTheme.greyTextColor,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  const Spacing(size: AppTheme.spacingTiny),
+                  Text(
+                    "Rs. ${products.last.unitPrice}",
+                    style: AppTheme.fontStyleDefault.copyWith(
+                      color: AppTheme.colorBlack,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const Spacing(size: AppTheme.spacingTiny),
+                  AddToCartButton(product: products.last),
+                  const Spacing(size: AppTheme.spacingMedium),
+                ],
+              ),
             ),
         ],
       ),
@@ -453,7 +505,7 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: homeController.currentCarouselIndex.value == index
-                        ? AppTheme.colorRed
+                        ? AppTheme.colorMain
                         : Colors.grey,
                   ),
                 );

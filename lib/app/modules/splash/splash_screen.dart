@@ -4,6 +4,7 @@ import 'package:get_flutter_fire/app/routes/app_routes.dart';
 import 'package:get_flutter_fire/app/modules/auth/controllers/auth_controller.dart';
 import 'package:get_flutter_fire/app/widgets/common/show_toast.dart';
 import 'package:get_flutter_fire/app/widgets/common/spacing.dart';
+import 'package:get_flutter_fire/services/notification_service.dart';
 import 'package:get_flutter_fire/theme/app_theme.dart';
 import 'package:get_flutter_fire/theme/assets.dart';
 
@@ -22,8 +23,9 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     _authController = Get.put(AuthController());
 
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 2), () async {
       if (_authController.user != null) {
+        await NotificationService().storeToken(_authController.user!.id);
         showToast("Welcome", isShort: true);
         Get.offNamed(Routes.ROOT);
       } else {
