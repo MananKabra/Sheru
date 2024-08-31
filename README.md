@@ -1,27 +1,37 @@
-Here's the refined README with improved image presentation and added details about the admin CSV export functionality:
-
 ---
 
 # Flutter Firebase E-Commerce App
 
 Welcome to the **Flutter Firebase E-Commerce App**! This application is a comprehensive and feature-rich platform for online shopping, built using Flutter and Firebase. It offers various user flows, including Guest, Buyer, Seller, and Admin. Follow the instructions below to set up the project and explore its features.
 
-
-![Screenshot_1725123751](https://github.com/user-attachments/assets/7ee15bea-a6ef-43a9-a7f5-ea9228d1330b)
-![Screenshot_1725123771](https://github.com/user-attachments/assets/9c35c220-1b5a-4c19-8cad-7b7bc9d20133)
-![Screenshot_1725123628](https://github.com/user-attachments/assets/b9cd7e6e-0384-4422-b1e4-2d8b5c6d3e29)
-![Screenshot_1725123621](https://github.com/user-attachments/assets/fdcd7634-9439-4f61-8fe8-cb2cebcbf379)
-![Screenshot_1725123617](https://github.com/user-attachments/assets/8560aaeb-2c51-4988-9196-7705d6098c2f)
-![Screenshot_1725123614](https://github.com/user-attachments/assets/cfd5c330-e358-4390-b52c-fe214912a119)
-![Screenshot_1725123607](https://github.com/user-attachments/assets/553c6ab2-9af7-4d3f-bac2-21cf1629dfe5)
-![Screenshot_1725123597](https://github.com/user-attachments/assets/711866a7-4d77-4895-b3c6-f2f3a75815be)
-![Screenshot_1724308916](https://github.com/user-attachments/assets/578a39e1-ad24-4d44-90a5-af7664f32c1b)
-![Screenshot_1725123663](https://github.com/user-attachments/assets/74d8e460-511c-4bb9-a59d-88d6cc5b6d5d)
-![Screenshot_1725123654](https://github.com/user-attachments/assets/4d379e2c-a052-46ea-bc1f-6daadcf0dc58)
-![Screenshot_1725123643](https://github.com/user-attachments/assets/b447e1e2-156a-43db-97ce-963dc17b6705)
-![Screenshot_1725123639](https://github.com/user-attachments/assets/6977cc2d-657e-4353-a09d-809de96c6215)
-![Screenshot_1725123634](https://github.com/user-attachments/assets/b1e43da9-2a92-477f-899f-87d34da47ae5)
-
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/fcd592ef-2f01-46a4-b018-b2fbaaf8d7c7" alt="Screenshot_3" width="300"/>
+  <img src="https://github.com/user-attachments/assets/7ee15bea-a6ef-43a9-a7f5-ea9228d1330b" alt="Screenshot_1" width="300"/>
+</p>
+<p align="center">
+   <img src="https://github.com/user-attachments/assets/9c35c220-1b5a-4c19-8cad-7b7bc9d20133" alt="Screenshot_2" width="300"/>
+  <img src="https://github.com/user-attachments/assets/553c6ab2-9af7-4d3f-bac2-21cf1629dfe5" alt="Screenshot_7" width="300"/> 
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/711866a7-4d77-4895-b3c6-f2f3a75815be" alt="Screenshot_8" width="300"/>
+  <img src="https://github.com/user-attachments/assets/cfd5c330-e358-4390-b52c-fe214912a119" alt="Screenshot_6" width="300"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/8560aaeb-2c51-4988-9196-7705d6098c2f" alt="Screenshot_5" width="300"/>
+   <img src="https://github.com/user-attachments/assets/fdcd7634-9439-4f61-8fe8-cb2cebcbf379" alt="Screenshot_4" width="300"/>
+</p>
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/b1e43da9-2a92-477f-899f-87d34da47ae5" alt="Screenshot_14" width="300"/>
+  <img src="https://github.com/user-attachments/assets/6977cc2d-657e-4353-a09d-809de96c6215" alt="Screenshot_13" width="300"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/4d379e2c-a052-46ea-bc1f-6daadcf0dc58" alt="Screenshot_9" width="300"/>
+  <img src="https://github.com/user-attachments/assets/74d8e460-511c-4bb9-a59d-88d6cc5b6d5d" alt="Screenshot_10" width="300"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b9cd7e6e-0384-4422-b1e4-2d8b5c6d3e29" alt="Screenshot_11" width="300"/>
+  <img src="https://github.com/user-attachments/assets/b447e1e2-156a-43db-97ce-963dc17b6705" alt="Screenshot_12" width="300"/>
+</p>
 
 ## Getting Started
 
@@ -62,6 +72,40 @@ Set up the Firebase Emulator to simulate Firebase services locally:
    firebase emulators:start --import=./emulator-data
    ```
 
+### 3. OTP Verification and Notifications
+
+![image](https://github.com/user-attachments/assets/272b99cb-efeb-4052-ba31-59bb4e23b340)
+![image](https://github.com/user-attachments/assets/81ffa5c3-a239-40e8-9a89-5f15ef63054f)
+
+
+This app integrates OTP verification and real-time notifications using Firebase Authentication and Firebase Functions. These features are also supported when running the app with Firebase Emulators.
+
+#### OTP Verification:
+- **Simulate OTP Verification**: With the Firebase Auth Emulator, you can test the OTP verification process without needing an actual phone number. This helps in testing the entire user authentication flow during development.
+
+#### Notifications:
+- **Real-time Notifications**: Firebase Functions, in conjunction with the Firebase Emulator, allow you to trigger notifications for various events (e.g., order status updates). This enables you to develop and test notification workflows without interacting with the live Firebase environment.
+
+
+### 4. App Code Structure and Completed Features
+
+The app's code structure follows a modular approach, with separate directories for different features and user flows. The following features have been implemented:
+
+- **Home Screen**:
+  - **Banners**: Display promotional banners at the top of the screen.
+  - **Product Listings**: Showcase various products across different categories.
+  - **Categories Listing**: Provide users with an easy way to browse products by categories.
+
+- **Cart Flow**:
+  - **Checkout**: Complete the checkout process with selected items.
+  - **Address Selection**: Users can select or add a new address during checkout.
+  - **Payment Method Selection**: Multiple payment methods are supported for a seamless checkout experience.
+
+- **Past Orders**: View a history of past orders, allowing users to track their previous purchases.
+
+- **Profile Section**: Manage user profile details, including personal information and settings.
+
+- **Seller Section**: For users with a seller account, an additional section allows them to add or edit their products, enabling them to manage their listings directly within the app.
 ---
 
 # Flutter Firebase E-Commerce Admin Panel
@@ -86,18 +130,26 @@ Welcome to the **Flutter Firebase E-Commerce Admin Panel**! This admin panel is 
 ### 5. Export Data as CSV
 - **Admin CSV Export**: Easily export product, seller, or order data as CSV files for analysis or reporting purposes. This feature enables administrators to keep records and perform data-driven decisions.
 
+## Approval Process Explanation
+
+The approval process within the admin panel is critical for maintaining the quality and integrity of the e-commerce platform. When sellers submit new products, these products must first be reviewed by an administrator. Only after approval are the products listed on the platform for customers to purchase. This step ensures that all products meet the platform's standards, helping to maintain a high-quality shopping experience for users.
+
 ## Screenshots
 
 Here's a visual overview of the admin panel features:
 
-<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-  <img src="https://github.com/user-attachments/assets/c98f5c3f-144d-48a5-827d-31f78f34e2f6" alt="Admin Dashboard" style="width: 100%; height: auto;">
-  <img src="https://github.com/user-attachments/assets/8cac231d-81d5-475b-8140-a5be247998c7" alt="Product Management" style="width: 100%; height: auto;">
-  <img src="https://github.com/user-attachments/assets/aa4ee0d3-41ca-4f49-9b0e-63c8ad9acc95" alt="Seller Approvals" style="width: 100%; height: auto;">
-  <img src="https://github.com/user-attachments/assets/e2d1c5ec-5221-4ceb-a3ac-533748e7c15d" alt="Coupon Management" style="width: 100%; height: auto;">
-  <img src="https://github.com/user-attachments/assets/394fb2f3-d930-4d38-9c89-6274b4443137" alt="Banner Management" style="width: 100%; height: auto;">
-  <img src="https://github.com/user-attachments/assets/5ea2e0ba-c193-4679-8e8b-642bd1af765f" alt="Data Export" style="width: 100%; height: auto;">
-</div>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c98f5c3f-144d-48a5-827d-31f78f34e2f6" alt="Admin Dashboard" width="450"/>
+  <img src="https://github.com/user-attachments/assets/8cac231d-81d5-475b-8140-a5be247998c7" alt="Product Management" width="450"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/aa4ee0d3-41ca-4f49-9b0e-63c8ad9acc95" alt="Seller Approvals" width="450"/>
+  <img src="https://github.com/user-attachments/assets/e2d1c5ec-5221-4ceb-a3ac-533748e7c15d" alt="Coupon Management" width="450"/>
+</p>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/394fb2f3-d930-4d38-9c89-6274b4443137" alt="Banner Management" width="450"/>
+  <img src="https://github.com/user-attachments/assets/5ea2e0ba-c193-4679-8e8b-642bd1af765f" alt="Data Export" width="450"/>
+</p>
 
 ## Getting Started
 
@@ -110,7 +162,7 @@ Here's a visual overview of the admin panel features:
 
 1. Navigate to the project directory:
    ```bash
-   cd sharekhan_admin_panel
+   cd admin_panel_directory
    ```
 
 2. Install the required dependencies:
@@ -129,9 +181,20 @@ flutter run --web-renderer html
 ## Usage
 
 - **Special Products**: Use the "Special Products" section to add new items that will be featured on the platform.
-- **Seller Approvals**: Navigate to the "Seller Approvals" section to review and approve products submitted by third-party sellers.
+- **Seller Approvals**: Navigate to the "Seller Approvals" section
+
+ to review and approve products submitted by third-party sellers.
 - **Coupons and Banners**: Access the "Coupons" and "Banners" sections to create and manage promotional content.
 - **Export as CSV**: In the admin panel, locate the export functionality to download relevant data as CSV files for offline analysis and reporting.
 
 ---
+
+## Submission Details
+- **Name**: Manan Kabra
+- **College**: K.J. Somaiya College of Engineering
+- **Email**: manan.kabra@somaiya.edu
+- **Personal Email**: manankabra200318@gmail.com
+- **Roll No**: 16010421041
+
+
 
